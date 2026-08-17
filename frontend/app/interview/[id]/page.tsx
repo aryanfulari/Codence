@@ -155,7 +155,7 @@ export default function InterviewPage() {
               href="/chat"
               className="rounded-2xl bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-strong)]"
             >
-              Ask MetaWiz about this decision
+              Ask Codence about this decision
             </Link>
             <Link
               href="/"

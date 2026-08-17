@@ -17,8 +17,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "MetaWiz AI",
-  description: "Frontend shell for MetaWiz AI hackathon flow."
+  title: "Codence AI",
+  description: "Frontend shell for Codence AI hackathon flow."
 };
 
 export default function RootLayout({

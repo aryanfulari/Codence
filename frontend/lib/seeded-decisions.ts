@@ -10,7 +10,7 @@ export type SeededDecision = {
 export const seededDecisions: SeededDecision[] = [
   {
     prTitle: "Fix duplicate charges under high load",
-    prUrl: "https://github.com/metawiz/demo/pull/47",
+    prUrl: "https://github.com/codence/demo/pull/47",
     author: "Aryan",
     date: "Mar 12, 2025",
     summary:
@@ -19,7 +19,7 @@ export const seededDecisions: SeededDecision[] = [
   },
   {
     prTitle: "Migrate auth provider after CVE disclosure",
-    prUrl: "https://github.com/metawiz/demo/pull/63",
+    prUrl: "https://github.com/codence/demo/pull/63",
     author: "Meghana",
     date: "Apr 3, 2025",
     summary:
@@ -28,7 +28,7 @@ export const seededDecisions: SeededDecision[] = [
   },
   {
     prTitle: "Add tiered importance scoring for PR interviews",
-    prUrl: "https://github.com/metawiz/demo/pull/81",
+    prUrl: "https://github.com/codence/demo/pull/81",
     author: "Suzanne",
     date: "Jun 21, 2025",
     summary:
@@ -37,7 +37,7 @@ export const seededDecisions: SeededDecision[] = [
   },
   {
     prTitle: "Switch vector search to local ChromaDB",
-    prUrl: "https://github.com/metawiz/demo/pull/94",
+    prUrl: "https://github.com/codence/demo/pull/94",
     author: "Ruchira",
     date: "Jul 9, 2025",
     summary:

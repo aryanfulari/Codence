@@ -14,7 +14,7 @@ type ChatMessage = {
 const SUGGESTED_QUESTIONS = [
   "Why did we change payment retry handling?",
   "Why did we migrate the auth provider?",
-  "Why does MetaWiz score every PR?"
+  "Why does Codence score every PR?"
 ];
 
 function answerFromSeeds(query: string): { content: string; citations: ChatCitation[] } {
@@ -88,7 +88,7 @@ export default function ChatPage() {
         <div className="border-b border-[var(--card-border)] pb-6">
           <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">RAG Chat</p>
           <h1 className="mt-3 text-4xl font-medium text-[var(--foreground)]">
-            Ask MetaWiz why the codebase is the way it is.
+            Ask Codence why the codebase is the way it is.
           </h1>
           <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)]">
             Every answer is grounded in stored decisions and cited by PR, author, and date.
@@ -105,7 +105,7 @@ export default function ChatPage() {
                   No decision retrieved yet
                 </h2>
                 <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-                  Ask a grounded question like the ones below and MetaWiz will respond with
+                  Ask a grounded question like the ones below and Codence will respond with
                   cited decisions from stored PR interviews.
                 </p>
 
@@ -187,7 +187,7 @@ export default function ChatPage() {
               disabled={isSending || !input.trim()}
               className="flex items-center justify-center gap-2 rounded-2xl bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSending ? "Asking..." : "Ask MetaWiz"}
+              {isSending ? "Asking..." : "Ask Codence"}
             </button>
           </div>
         </form>

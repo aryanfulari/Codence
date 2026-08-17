@@ -17,10 +17,10 @@ export function SiteHeader() {
       <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between lg:px-10">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--foreground)] text-xs font-semibold text-[var(--background)]">
-            MW
+            C
           </div>
           <p className="text-lg font-semibold whitespace-nowrap text-[var(--foreground)]">
-            MetaWiz
+            Codence
           </p>
         </Link>
 
