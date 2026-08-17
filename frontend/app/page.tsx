@@ -65,7 +65,7 @@ export default function LandingPage() {
         </p>
       </section>
 
-      <section className="fade-up-delay mx-auto max-w-xl pb-16 lg:pb-24">
+      <section className="fade-up-delay mx-auto max-w-3xl pb-16 lg:pb-24">
         <div className="overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[var(--shadow)]">
           <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
             <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
@@ -74,13 +74,13 @@ export default function LandingPage() {
             <span className="ml-2 text-xs text-[var(--muted)]">codence.app/connect</span>
           </div>
 
-          <div className="p-6 lg:p-8">
-            <div className="mb-6 flex items-center justify-between">
+          <div className="p-8 lg:p-10">
+            <div className="mb-8 flex items-center justify-between">
               <div>
                 <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
                   Repo Connect
                 </p>
-                <h2 className="mt-2 text-2xl font-medium text-[var(--foreground)]">
+                <h2 className="mt-2 text-3xl font-medium text-[var(--foreground)]">
                   {isConnectedish ? "Repository connected" : "Connect a repository"}
                 </h2>
               </div>
@@ -119,44 +119,46 @@ export default function LandingPage() {
                 </button>
               </div>
             ) : (
-              <form className="space-y-5" onSubmit={handleSubmit}>
-                <div className="space-y-2">
-                  <label htmlFor="token" className="text-sm font-medium text-[var(--foreground)]">
-                    Personal Access Token
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="token"
-                      name="token"
-                      type={showToken ? "text" : "password"}
-                      value={token}
-                      onChange={(event) => setToken(event.target.value)}
-                      placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
-                      className="w-full rounded-2xl border border-[var(--card-border)] bg-white px-4 py-3 pr-20 text-base outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowToken((prev) => !prev)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)] hover:text-[var(--accent-strong)]"
-                    >
-                      {showToken ? "Hide" : "Show"}
-                    </button>
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label htmlFor="token" className="text-sm font-medium text-[var(--foreground)]">
+                      Personal Access Token
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="token"
+                        name="token"
+                        type={showToken ? "text" : "password"}
+                        value={token}
+                        onChange={(event) => setToken(event.target.value)}
+                        placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+                        className="w-full rounded-2xl border border-[var(--card-border)] bg-white px-4 py-3.5 pr-20 text-base outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowToken((prev) => !prev)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)] hover:text-[var(--accent-strong)]"
+                      >
+                        {showToken ? "Hide" : "Show"}
+                      </button>
+                    </div>
                   </div>
-                </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="repo" className="text-sm font-medium text-[var(--foreground)]">
-                    Repository Name
-                  </label>
-                  <input
-                    id="repo"
-                    name="repo"
-                    type="text"
-                    value={repo}
-                    onChange={(event) => setRepo(event.target.value)}
-                    placeholder="owner/repository-name"
-                    className="w-full rounded-2xl border border-[var(--card-border)] bg-white px-4 py-3 text-base outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
-                  />
+                  <div className="space-y-2">
+                    <label htmlFor="repo" className="text-sm font-medium text-[var(--foreground)]">
+                      Repository Name
+                    </label>
+                    <input
+                      id="repo"
+                      name="repo"
+                      type="text"
+                      value={repo}
+                      onChange={(event) => setRepo(event.target.value)}
+                      placeholder="owner/repository-name"
+                      className="w-full rounded-2xl border border-[var(--card-border)] bg-white px-4 py-3.5 text-base outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
+                    />
+                  </div>
                 </div>
 
                 {error && (
@@ -168,7 +170,7 @@ export default function LandingPage() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--foreground)] px-5 py-3 text-base font-semibold text-white transition hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--foreground)] px-5 py-4 text-base font-semibold text-white transition hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "submitting" && <span className="spinner" aria-hidden />}
                   {status === "submitting" ? "Connecting..." : "Connect Repository"}
