@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 
-const fraunces = Fraunces({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"]
+  weight: ["500", "600", "700"]
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["400", "500", "600", "700"]
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500"]
 });
 
 export const metadata: Metadata = {
@@ -27,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
         <div className="page-shell min-h-screen">
           <SiteHeader />

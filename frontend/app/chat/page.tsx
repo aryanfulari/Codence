@@ -86,7 +86,7 @@ export default function ChatPage() {
     <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
       <section className="fade-up mx-auto max-w-3xl pt-16 pb-10 text-center lg:pt-20">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">RAG Chat</p>
-        <h1 className="mt-6 text-5xl font-medium leading-[1.05] text-[var(--foreground)] lg:text-7xl">
+        <h1 className="mt-6 text-5xl font-semibold leading-[1.05] text-[var(--foreground)] lg:text-7xl">
           Ask Codence why the codebase is the way it is.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)] lg:text-xl">
@@ -101,7 +101,7 @@ export default function ChatPage() {
             <div className="fade-up-delay flex flex-1 items-center justify-center">
               <div className="w-full max-w-3xl rounded-[1.75rem] border border-dashed border-[var(--card-border)] bg-white/80 p-8 text-center">
                 <p className="text-sm uppercase tracking-[0.28em] text-[var(--muted)]">Empty state</p>
-                <h2 className="mt-3 text-3xl font-medium text-[var(--foreground)]">
+                <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
                   No decision retrieved yet
                 </h2>
                 <p className="mt-4 text-base leading-7 text-[var(--muted)]">
@@ -146,7 +146,7 @@ export default function ChatPage() {
                             href={citation.prUrl ?? "#"}
                             target={citation.prUrl ? "_blank" : undefined}
                             rel={citation.prUrl ? "noreferrer" : undefined}
-                            className="rounded-xl bg-[#f9f6f0] px-3 py-2 text-sm text-[var(--accent-strong)] transition hover:bg-[var(--accent-soft)]"
+                            className="rounded-xl bg-[#f9f6f0] px-3 py-2 font-mono text-xs text-[var(--accent-strong)] transition hover:bg-[var(--accent-soft)]"
                           >
                             {citation.prTitle} · {citation.author} · {citation.date}
                           </a>

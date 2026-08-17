@@ -55,7 +55,7 @@ export default function LandingPage() {
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           Connect your GitHub repo
         </p>
-        <h1 className="mt-6 text-6xl font-medium leading-[1.02] text-[var(--foreground)] lg:text-8xl">
+        <h1 className="mt-6 text-6xl font-semibold leading-[1.02] text-[var(--foreground)] lg:text-8xl">
           Turn every critical pull request into institutional memory.
         </h1>
         <p className="mx-auto mt-8 max-w-2xl text-xl leading-9 text-[var(--muted)] lg:text-2xl">
@@ -71,7 +71,7 @@ export default function LandingPage() {
             <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#d9714f]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
-            <span className="ml-2 text-xs text-[var(--muted)]">codence.app/connect</span>
+            <span className="ml-2 font-mono text-xs text-[var(--muted)]">codence.app/connect</span>
           </div>
 
           <div className="p-8 lg:p-10">
@@ -80,7 +80,7 @@ export default function LandingPage() {
                 <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
                   Repo Connect
                 </p>
-                <h2 className="mt-2 text-3xl font-medium text-[var(--foreground)]">
+                <h2 className="mt-2 text-3xl font-semibold text-[var(--foreground)]">
                   {isConnectedish ? "Repository connected" : "Connect a repository"}
                 </h2>
               </div>
@@ -203,7 +203,7 @@ export default function LandingPage() {
           <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">
             See it in action
           </p>
-          <h2 className="mt-3 text-3xl font-medium text-[var(--foreground)] lg:text-4xl">
+          <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)] lg:text-4xl">
             Every answer, grounded and cited.
           </h2>
         </div>
@@ -213,7 +213,7 @@ export default function LandingPage() {
             <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#d9714f]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
-            <span className="ml-2 text-xs text-[var(--muted)]">codence.app/chat</span>
+            <span className="ml-2 font-mono text-xs text-[var(--muted)]">codence.app/chat</span>
           </div>
 
           <div className="space-y-4 bg-white p-6 lg:p-8">
@@ -227,7 +227,7 @@ export default function LandingPage() {
               Removed the automatic retry logic in payment_processor.py because
               retries were firing before the gateway confirmed failure, causing
               duplicate charges under high load.
-              <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-[var(--card-border)] bg-white px-3 py-1.5 text-xs text-[var(--accent-strong)]">
+              <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-[var(--card-border)] bg-white px-3 py-1.5 font-mono text-xs text-[var(--accent-strong)]">
                 PR #47 · Aryan · Mar 12, 2025
               </div>
             </div>

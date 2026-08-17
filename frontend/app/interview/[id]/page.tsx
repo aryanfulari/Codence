@@ -141,7 +141,7 @@ export default function InterviewPage() {
             {state === "success" ? "✓" : "→"}
           </div>
           <div className="space-y-2">
-            <h1 className="text-3xl font-medium text-[var(--foreground)]">
+            <h1 className="text-3xl font-semibold text-[var(--foreground)]">
               {state === "success" ? "Interview submitted" : "Interview skipped"}
             </h1>
             <p className="max-w-xl text-base leading-7 text-[var(--muted)]">
@@ -175,11 +175,11 @@ export default function InterviewPage() {
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           PR Interview
         </p>
-        <h1 className="mt-6 text-5xl font-medium leading-[1.05] text-[var(--foreground)] lg:text-7xl">
+        <h1 className="mt-6 text-5xl font-semibold leading-[1.05] text-[var(--foreground)] lg:text-7xl">
           {prTitle}
         </h1>
         <p className="mt-6 text-lg leading-8 text-[var(--muted)] lg:text-xl">
-          Interview ID: <span className="font-semibold text-[var(--foreground)]">{id}</span>
+          Interview ID: <span className="font-mono font-medium text-[var(--foreground)]">{id}</span>
         </p>
 
         <div className="mx-auto mt-8 grid max-w-md gap-3 text-sm text-[var(--muted)] sm:grid-cols-2">
@@ -235,7 +235,7 @@ export default function InterviewPage() {
               <p className="text-sm uppercase tracking-[0.28em] text-[var(--accent-strong)]">
                 Question {currentIndex + 1} of {questions.length}
               </p>
-              <h2 className="mt-2 text-2xl font-medium text-[var(--foreground)]">
+              <h2 className="mt-2 text-2xl font-semibold text-[var(--foreground)]">
                 {questions[currentIndex]}
               </h2>
             </div>
