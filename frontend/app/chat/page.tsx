@@ -83,20 +83,20 @@ export default function ChatPage() {
   }
 
   return (
-    <section className="mx-auto flex min-h-[calc(100vh-92px)] w-full max-w-6xl flex-col px-6 py-12 lg:px-10">
-      <div className="fade-up flex min-h-[72vh] flex-1 flex-col rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-6 shadow-[var(--shadow)] lg:p-8">
-        <div className="border-b border-[var(--card-border)] pb-6">
-          <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">RAG Chat</p>
-          <h1 className="mt-3 text-4xl font-medium text-[var(--foreground)]">
-            Ask Codence why the codebase is the way it is.
-          </h1>
-          <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)]">
-            Every answer is grounded in stored decisions and cited by PR, author, and date.
-            {demoMode && " Currently answering from a local demo dataset — connect the backend for live data."}
-          </p>
-        </div>
+    <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
+      <section className="fade-up mx-auto max-w-3xl pt-16 pb-10 text-center lg:pt-20">
+        <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">RAG Chat</p>
+        <h1 className="mt-6 text-5xl font-medium leading-[1.05] text-[var(--foreground)] lg:text-7xl">
+          Ask Codence why the codebase is the way it is.
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)] lg:text-xl">
+          Every answer is grounded in stored decisions and cited by PR, author, and date.
+          {demoMode && " Currently answering from a local demo dataset — connect the backend for live data."}
+        </p>
+      </section>
 
-        <div className="flex flex-1 flex-col gap-4 overflow-y-auto py-6">
+      <div className="fade-up-delay flex min-h-[60vh] flex-col rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-6 pb-16 shadow-[var(--shadow)] lg:p-8">
+        <div className="flex flex-1 flex-col gap-4 overflow-y-auto">
           {messages.length === 0 ? (
             <div className="fade-up-delay flex flex-1 items-center justify-center">
               <div className="w-full max-w-3xl rounded-[1.75rem] border border-dashed border-[var(--card-border)] bg-white/80 p-8 text-center">
@@ -192,6 +192,6 @@ export default function ChatPage() {
           </div>
         </form>
       </div>
-    </section>
+    </div>
   );
 }

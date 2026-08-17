@@ -170,37 +170,35 @@ export default function InterviewPage() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
-      <div className="fade-up rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-8 shadow-[var(--shadow)] lg:p-10">
-        <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div className="space-y-3">
-            <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">
-              PR Interview
-            </p>
-            <h1 className="max-w-3xl text-4xl font-medium leading-tight text-[var(--foreground)] lg:text-5xl">
-              {prTitle}
-            </h1>
-            <p className="text-base leading-7 text-[var(--muted)]">
-              Interview ID: <span className="font-semibold text-[var(--foreground)]">{id}</span>
+    <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
+      <section className="fade-up mx-auto max-w-3xl pt-16 pb-10 text-center lg:pt-20">
+        <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
+          PR Interview
+        </p>
+        <h1 className="mt-6 text-5xl font-medium leading-[1.05] text-[var(--foreground)] lg:text-7xl">
+          {prTitle}
+        </h1>
+        <p className="mt-6 text-lg leading-8 text-[var(--muted)] lg:text-xl">
+          Interview ID: <span className="font-semibold text-[var(--foreground)]">{id}</span>
+        </p>
+
+        <div className="mx-auto mt-8 grid max-w-md gap-3 text-sm text-[var(--muted)] sm:grid-cols-2">
+          <div className="rounded-2xl border border-[var(--card-border)] bg-white/80 px-4 py-3">
+            <p className="uppercase tracking-[0.22em]">Progress</p>
+            <p className="mt-2 font-semibold text-[var(--foreground)]">
+              {answeredCount} of {questions.length} answered
             </p>
           </div>
-
-          <div className="grid gap-3 text-sm text-[var(--muted)] sm:grid-cols-2">
-            <div className="rounded-2xl bg-white/80 px-4 py-3">
-              <p className="uppercase tracking-[0.22em]">Progress</p>
-              <p className="mt-2 font-semibold text-[var(--foreground)]">
-                {answeredCount} of {questions.length} answered
-              </p>
-            </div>
-            <div className="rounded-2xl bg-white/80 px-4 py-3">
-              <p className="uppercase tracking-[0.22em]">Mode</p>
-              <p className="mt-2 font-semibold text-[var(--foreground)]">
-                {demoMode ? "Demo (offline)" : "Live"}
-              </p>
-            </div>
+          <div className="rounded-2xl border border-[var(--card-border)] bg-white/80 px-4 py-3">
+            <p className="uppercase tracking-[0.22em]">Mode</p>
+            <p className="mt-2 font-semibold text-[var(--foreground)]">
+              {demoMode ? "Demo (offline)" : "Live"}
+            </p>
           </div>
         </div>
+      </section>
 
+      <div className="fade-up-delay rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-8 pb-10 shadow-[var(--shadow)] lg:p-10">
         {demoMode && (
           <div className="mb-6 rounded-2xl bg-[#fff3d6] px-4 py-3 text-sm leading-6 text-[#92620a]">
             Backend not reachable — using fallback questions so you can still try the voice interview.
@@ -317,6 +315,6 @@ export default function InterviewPage() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
