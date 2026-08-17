@@ -84,10 +84,10 @@ export default function ChatPage() {
 
   return (
     <section className="mx-auto flex min-h-[calc(100vh-92px)] w-full max-w-6xl flex-col px-6 py-12 lg:px-10">
-      <div className="fade-up flex min-h-[72vh] flex-1 flex-col rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-6 shadow-[var(--shadow)] backdrop-blur lg:p-8">
+      <div className="fade-up flex min-h-[72vh] flex-1 flex-col rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-6 shadow-[var(--shadow)] lg:p-8">
         <div className="border-b border-[var(--card-border)] pb-6">
           <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">RAG Chat</p>
-          <h1 className="mt-3 text-4xl font-semibold text-[var(--foreground)]">
+          <h1 className="mt-3 text-4xl font-medium text-[var(--foreground)]">
             Ask MetaWiz why the codebase is the way it is.
           </h1>
           <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)]">
@@ -101,7 +101,7 @@ export default function ChatPage() {
             <div className="fade-up-delay flex flex-1 items-center justify-center">
               <div className="w-full max-w-3xl rounded-[1.75rem] border border-dashed border-[var(--card-border)] bg-white/80 p-8 text-center">
                 <p className="text-sm uppercase tracking-[0.28em] text-[var(--muted)]">Empty state</p>
-                <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
+                <h2 className="mt-3 text-3xl font-medium text-[var(--foreground)]">
                   No decision retrieved yet
                 </h2>
                 <p className="mt-4 text-base leading-7 text-[var(--muted)]">

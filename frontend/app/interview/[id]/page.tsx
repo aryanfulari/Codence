@@ -136,12 +136,12 @@ export default function InterviewPage() {
   if (state === "success" || state === "skipped") {
     return (
       <section className="mx-auto w-full max-w-4xl px-6 py-12 lg:px-10">
-        <div className="fade-up flex flex-col items-center gap-6 rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-10 text-center shadow-[var(--shadow)] backdrop-blur">
+        <div className="fade-up flex flex-col items-center gap-6 rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-10 text-center shadow-[var(--shadow)]">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--accent-soft)] text-3xl text-[var(--accent-strong)]">
             {state === "success" ? "✓" : "→"}
           </div>
           <div className="space-y-2">
-            <h1 className="text-3xl font-semibold text-[var(--foreground)]">
+            <h1 className="text-3xl font-medium text-[var(--foreground)]">
               {state === "success" ? "Interview submitted" : "Interview skipped"}
             </h1>
             <p className="max-w-xl text-base leading-7 text-[var(--muted)]">
@@ -171,13 +171,13 @@ export default function InterviewPage() {
 
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
-      <div className="fade-up rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-8 shadow-[var(--shadow)] backdrop-blur lg:p-10">
+      <div className="fade-up rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-8 shadow-[var(--shadow)] lg:p-10">
         <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-3">
             <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">
               PR Interview
             </p>
-            <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-[var(--foreground)] lg:text-5xl">
+            <h1 className="max-w-3xl text-4xl font-medium leading-tight text-[var(--foreground)] lg:text-5xl">
               {prTitle}
             </h1>
             <p className="text-base leading-7 text-[var(--muted)]">
@@ -237,7 +237,7 @@ export default function InterviewPage() {
               <p className="text-sm uppercase tracking-[0.28em] text-[var(--accent-strong)]">
                 Question {currentIndex + 1} of {questions.length}
               </p>
-              <h2 className="mt-2 text-2xl font-semibold text-[var(--foreground)]">
+              <h2 className="mt-2 text-2xl font-medium text-[var(--foreground)]">
                 {questions[currentIndex]}
               </h2>
             </div>

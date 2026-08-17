@@ -13,37 +13,30 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="relative z-10">
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-4 px-6 py-6 sm:flex-row sm:items-center sm:justify-between lg:px-10">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--foreground)] text-sm font-semibold uppercase tracking-[0.28em] text-white">
+    <header className="relative z-10 border-b border-[var(--card-border)]">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between lg:px-10">
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--foreground)] text-xs font-semibold text-[var(--background)]">
             MW
           </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
-              MetaWiz AI
-            </p>
-            <p className="text-lg font-semibold whitespace-nowrap text-[var(--foreground)]">
-              Decision Memory
-            </p>
-          </div>
+          <p className="text-lg font-semibold whitespace-nowrap text-[var(--foreground)]">
+            MetaWiz
+          </p>
         </Link>
 
-        <nav className="w-full rounded-full border border-[var(--card-border)] bg-[var(--card)] p-1 shadow-[var(--shadow)] backdrop-blur sm:w-auto">
-          <ul className="flex items-center justify-between gap-1 sm:justify-start">
+        <nav className="w-full sm:w-auto">
+          <ul className="flex items-center justify-between gap-1 text-sm sm:justify-start sm:gap-8">
             {navItems.map((item) => {
               const isActive =
                 item.href === "/" ? pathname === "/" : pathname.startsWith(item.href.split("/").slice(0, 2).join("/"));
 
               return (
-                <li key={item.href} className="flex-1 sm:flex-none">
+                <li key={item.href}>
                   <Link
                     href={item.href}
                     aria-current={isActive ? "page" : undefined}
-                    className={`block rounded-full px-4 py-2 text-center text-sm font-medium transition ${
-                      isActive
-                        ? "bg-[var(--foreground)] text-white"
-                        : "text-[var(--foreground)] hover:bg-white hover:text-[var(--accent-strong)]"
+                    className={`font-medium transition ${
+                      isActive ? "text-[var(--foreground)]" : "text-[var(--muted)] hover:text-[var(--foreground)]"
                     }`}
                   >
                     {item.label}
