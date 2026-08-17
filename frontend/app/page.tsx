@@ -50,8 +50,8 @@ export default function LandingPage() {
   const isConnectedish = status === "connected" || status === "demo";
 
   return (
-    <section className="mx-auto flex min-h-[calc(100vh-92px)] w-full max-w-6xl flex-col justify-center px-6 py-12 lg:px-10">
-      <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+    <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
+      <section className="grid gap-10 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-24">
         <div className="fade-up space-y-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-white/70 px-4 py-2 text-sm text-[var(--muted)]">
             <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
@@ -201,7 +201,44 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="fade-up-delay-2 pb-20 lg:pb-28">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">
+            See it in action
+          </p>
+          <h2 className="mt-3 text-3xl font-medium text-[var(--foreground)] lg:text-4xl">
+            Every answer, grounded and cited.
+          </h2>
+        </div>
+
+        <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-[var(--card-border)] shadow-[var(--shadow)]">
+          <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#d9714f]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
+            <span className="ml-2 text-xs text-[var(--muted)]">metawiz.app/chat</span>
+          </div>
+
+          <div className="space-y-4 bg-white p-6 lg:p-8">
+            <div className="flex justify-end">
+              <div className="max-w-sm rounded-2xl bg-[var(--foreground)] px-4 py-3 text-sm text-white">
+                Why did we change payment retry handling?
+              </div>
+            </div>
+
+            <div className="max-w-lg rounded-2xl border border-[var(--card-border)] bg-[#faf9f6] px-4 py-3 text-sm leading-6 text-[var(--foreground)]">
+              Removed the automatic retry logic in payment_processor.py because
+              retries were firing before the gateway confirmed failure, causing
+              duplicate charges under high load.
+              <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-[var(--card-border)] bg-white px-3 py-1.5 text-xs text-[var(--accent-strong)]">
+                PR #47 · Aryan · Mar 12, 2025
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
