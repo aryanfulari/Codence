@@ -2,8 +2,27 @@
 
 import { FormEvent, useState } from "react";
 import { connectRepo } from "@/lib/api";
+import { TestimonialMarquee } from "@/components/testimonial-marquee";
 
 const REPO_PATTERN = /^[\w.-]+\/[\w.-]+$/;
+
+const FEATURES = [
+  {
+    title: "Voice-first interviews",
+    description:
+      "Answer three AI-generated questions by voice right when the PR is fresh in your head — no forms, no forgetting why you made the call."
+  },
+  {
+    title: "Smart importance scoring",
+    description:
+      "Codence reads the actual diff and scores it against sensitive paths, new files, and dependency changes — only the PRs that matter trigger an interview."
+  },
+  {
+    title: "Grounded, cited chat",
+    description:
+      "Ask why the codebase is the way it is and get an answer grounded in stored decisions — cited by PR, author, and date, never a guess."
+  }
+];
 
 type Status = "idle" | "submitting" | "connected" | "demo";
 
@@ -181,18 +200,31 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="fade-up-delay mx-auto max-w-3xl pb-16 lg:pb-24">
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            "Voice-first developer interviews",
-            "AI-generated questions on important PRs",
-            "Cited team knowledge chat"
-          ].map((item) => (
+      <section className="fade-up-delay pb-20 lg:pb-28">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">
+            Why Codence
+          </p>
+          <h2 className="mt-3 text-4xl font-semibold text-[var(--foreground)] lg:text-5xl">
+            Built for the moment context usually disappears.
+          </h2>
+        </div>
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {FEATURES.map((feature, index) => (
             <div
-              key={item}
-              className="rounded-2xl border border-[var(--card-border)] bg-white/60 p-5 text-center"
+              key={feature.title}
+              className="rounded-[1.75rem] border border-[var(--card-border)] bg-white p-8"
             >
-              <p className="text-sm leading-6 text-[var(--foreground)]">{item}</p>
+              <span className="font-mono text-sm text-[var(--accent)]">
+                0{index + 1}
+              </span>
+              <h3 className="mt-5 text-2xl font-semibold text-[var(--foreground)]">
+                {feature.title}
+              </h3>
+              <p className="mt-3 text-base leading-7 text-[var(--muted)]">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>
@@ -232,6 +264,21 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="fade-up-delay-2 pb-20 lg:pb-28">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-sm uppercase tracking-[0.32em] text-[var(--accent-strong)]">
+            Teams shipping with Codence
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)] lg:text-4xl">
+            Institutional memory, not tribal knowledge.
+          </h2>
+        </div>
+
+        <div className="mt-10 -mx-6 lg:-mx-10">
+          <TestimonialMarquee />
         </div>
       </section>
     </div>

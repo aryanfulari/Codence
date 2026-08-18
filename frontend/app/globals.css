@@ -128,6 +128,37 @@ body {
   }
 }
 
+.marquee-viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation-direction: reverse;
+}
+
+.marquee-viewport:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .typing-dot {
   display: inline-block;
   height: 0.5rem;
