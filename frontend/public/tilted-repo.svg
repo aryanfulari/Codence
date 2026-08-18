@@ -1,0 +1,19 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#f5f4f2" />
+  <rect x="0.5" y="0.5" width="299" height="299" fill="none" stroke="#16150f" stroke-opacity="0.08" />
+
+  <line x1="95" y1="70" x2="95" y2="230" stroke="#16150f" stroke-opacity="0.15" stroke-width="3" />
+  <path d="M95 140 C 95 165, 130 165, 130 190" fill="none" stroke="#b45309" stroke-opacity="0.5" stroke-width="3" />
+  <line x1="130" y1="190" x2="130" y2="230" stroke="#b45309" stroke-opacity="0.5" stroke-width="3" />
+
+  <circle cx="95" cy="70" r="10" fill="#ffffff" stroke="#16150f" stroke-width="3" />
+  <circle cx="95" cy="140" r="10" fill="#ffffff" stroke="#16150f" stroke-width="3" />
+  <circle cx="95" cy="230" r="12" fill="#fef3c7" stroke="#b45309" stroke-width="3" />
+  <circle cx="130" cy="230" r="10" fill="#ffffff" stroke="#b45309" stroke-width="3" />
+
+  <g transform="translate(150 60)">
+    <rect width="110" height="34" rx="17" fill="#16150f" />
+    <circle cx="20" cy="17" r="6" fill="#fbbf24" />
+    <text x="36" y="22" font-family="ui-monospace, monospace" font-size="12" fill="#ffffff">connected</text>
+  </g>
+</svg>

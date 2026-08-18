@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { connectRepo } from "@/lib/api";
 import { TestimonialMarquee } from "@/components/testimonial-marquee";
+import TiltedCard from "@/components/TiltedCard/TiltedCard";
 
 const REPO_PATTERN = /^[\w.-]+\/[\w.-]+$/;
 
@@ -69,7 +70,7 @@ export default function LandingPage() {
   const isConnectedish = status === "connected" || status === "demo";
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
+    <div className="mx-auto w-full max-w-6xl overflow-x-hidden px-6 lg:px-10">
       <section className="fade-up mx-auto max-w-4xl pt-20 pb-12 text-center lg:pt-28">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           Connect your GitHub repo
@@ -84,7 +85,23 @@ export default function LandingPage() {
         </p>
       </section>
 
-      <section className="fade-up-delay mx-auto max-w-3xl pb-16 lg:pb-24">
+      <section className="fade-up-delay relative mx-auto max-w-3xl pb-16 lg:pb-24">
+        <div className="absolute -right-20 -top-10 hidden xl:block">
+          <TiltedCard
+            imageSrc="/tilted-repo.svg"
+            altText="Repository connected"
+            captionText="Repo synced"
+            containerHeight="170px"
+            containerWidth="170px"
+            imageHeight="170px"
+            imageWidth="170px"
+            rotateAmplitude={12}
+            scaleOnHover={1.08}
+            showMobileWarning={false}
+            showTooltip={true}
+          />
+        </div>
+
         <div className="overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[var(--shadow)]">
           <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
             <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
@@ -240,27 +257,45 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-[var(--card-border)] shadow-[var(--shadow)]">
-          <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#d9714f]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
-            <span className="ml-2 font-mono text-xs text-[var(--muted)]">codence.app/chat</span>
+        <div className="relative">
+          <div className="absolute -left-20 bottom-4 hidden xl:block">
+            <TiltedCard
+              imageSrc="/tilted-chat.svg"
+              altText="Grounded answer with citation"
+              captionText="Grounded answer"
+              containerHeight="170px"
+              containerWidth="170px"
+              imageHeight="170px"
+              imageWidth="170px"
+              rotateAmplitude={12}
+              scaleOnHover={1.08}
+              showMobileWarning={false}
+              showTooltip={true}
+            />
           </div>
 
-          <div className="space-y-4 bg-white p-6 lg:p-8">
-            <div className="flex justify-end">
-              <div className="max-w-sm rounded-2xl bg-[var(--foreground)] px-4 py-3 text-sm text-white">
-                Why did we change payment retry handling?
-              </div>
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-[var(--card-border)] shadow-[var(--shadow)]">
+            <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#d9714f]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
+              <span className="ml-2 font-mono text-xs text-[var(--muted)]">codence.app/chat</span>
             </div>
 
-            <div className="max-w-lg rounded-2xl border border-[var(--card-border)] bg-[#faf9f6] px-4 py-3 text-sm leading-6 text-[var(--foreground)]">
-              Removed the automatic retry logic in payment_processor.py because
-              retries were firing before the gateway confirmed failure, causing
-              duplicate charges under high load.
-              <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-[var(--card-border)] bg-white px-3 py-1.5 font-mono text-xs text-[var(--accent-strong)]">
-                PR #47 · Aryan · Mar 12, 2025
+            <div className="space-y-4 bg-white p-6 lg:p-8">
+              <div className="flex justify-end">
+                <div className="max-w-sm rounded-2xl bg-[var(--foreground)] px-4 py-3 text-sm text-white">
+                  Why did we change payment retry handling?
+                </div>
+              </div>
+
+              <div className="max-w-lg rounded-2xl border border-[var(--card-border)] bg-[#faf9f6] px-4 py-3 text-sm leading-6 text-[var(--foreground)]">
+                Removed the automatic retry logic in payment_processor.py because
+                retries were firing before the gateway confirmed failure, causing
+                duplicate charges under high load.
+                <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-[var(--card-border)] bg-white px-3 py-1.5 font-mono text-xs text-[var(--accent-strong)]">
+                  PR #47 · Aryan · Mar 12, 2025
+                </div>
               </div>
             </div>
           </div>
