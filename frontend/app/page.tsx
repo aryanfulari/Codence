@@ -302,7 +302,7 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <TiltWrapper className="mx-auto max-w-3xl rounded-2xl" rotateAmplitude={10} scaleOnHover={1.03}>
+        <TiltWrapper className="mx-auto mt-12 max-w-3xl rounded-2xl" rotateAmplitude={10} scaleOnHover={1.03}>
           <div className="overflow-hidden rounded-2xl border border-[var(--card-border)] shadow-[var(--shadow)]">
             <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
