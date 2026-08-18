@@ -14,7 +14,7 @@ export const seededDecisions: SeededDecision[] = [
     author: "Aryan",
     date: "Mar 12, 2025",
     summary:
-      "Removed the automatic retry logic in payment_processor.py because retries were firing before the gateway confirmed failure, causing customers to be charged twice under high load. Idempotency keys were considered but reverting the retry was the safer short-term fix.",
+      "Removed the automatic retry logic in payment_processor.py because retries were firing before the gateway confirmed failure, causing customers to be charged twice under high load. Idempotency keys were considered but reverting the retry was the safer immediate fix.",
     keywords: ["payment", "retry", "duplicate", "charge", "gateway", "processor"]
   },
   {
@@ -32,7 +32,7 @@ export const seededDecisions: SeededDecision[] = [
     author: "Suzanne",
     date: "Jun 21, 2025",
     summary:
-      "Introduced rule-based scoring so only PRs touching sensitive directories or config trigger a voice interview, instead of prompting on every PR. This kept interview fatigue low while still capturing the highest-risk decisions.",
+      "Introduced a scoring system based on rules so only PRs touching sensitive directories or config trigger a voice interview, instead of prompting on every PR. This kept interview fatigue low while still capturing the highest risk decisions.",
     keywords: ["scoring", "importance", "interview", "config", "webhook"]
   },
   {
@@ -41,7 +41,7 @@ export const seededDecisions: SeededDecision[] = [
     author: "Ruchira",
     date: "Jul 9, 2025",
     summary:
-      "Moved decision storage from a hosted vector database to local ChromaDB so nothing leaves the developer's machine. Cloud API mode was kept as an opt-in for teams that prefer convenience over privacy.",
+      "Moved decision storage from a hosted vector database to local ChromaDB so nothing leaves the developer's machine. Cloud API mode was kept as an option for teams that prefer convenience over privacy.",
     keywords: ["chromadb", "vector", "database", "privacy", "local", "embedding"]
   }
 ];

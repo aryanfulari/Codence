@@ -11,7 +11,7 @@ const FEATURES = [
   {
     title: "Speak it, don't type it",
     description:
-      "Answer three AI-generated questions by voice right when the PR is fresh in your head — no forms, no forgetting why you made the call."
+      "Answer three AI generated questions by voice while the PR is still fresh in your head. No forms, no forgetting why you made the call."
   },
   {
     title: "Only the PRs that matter",
@@ -21,7 +21,7 @@ const FEATURES = [
   {
     title: "Answers with receipts",
     description:
-      "Every answer comes grounded in stored decisions — cited by PR, author, and date. Never a guess."
+      "Every answer comes grounded in stored decisions, cited by PR, author, and date. Never a guess."
   }
 ];
 
@@ -46,7 +46,7 @@ export default function LandingPage() {
       return;
     }
     if (!REPO_PATTERN.test(trimmedRepo)) {
-      setError("Use the owner/repository-name format, e.g. codence-ai/core.");
+      setError("Use the owner/repo format, e.g. codence/core.");
       return;
     }
 
@@ -76,7 +76,7 @@ export default function LandingPage() {
           Institutional memory, automated
         </p>
         <h1 className="mt-6 text-6xl font-semibold leading-[1.02] text-[var(--foreground)] lg:text-8xl">
-          The reasoning behind your code — remembered, not lost.
+          The reasoning behind your code. Remembered, not lost.
         </h1>
         <p className="mx-auto mt-8 max-w-2xl text-xl leading-9 text-[var(--muted)] lg:text-2xl">
           A quick voice interview on the PRs that matter. A searchable
@@ -175,7 +175,7 @@ export default function LandingPage() {
                         type="text"
                         value={repo}
                         onChange={(event) => setRepo(event.target.value)}
-                        placeholder="owner/repository-name"
+                        placeholder="owner/reponame"
                         className="w-full rounded-2xl border border-[var(--card-border)] bg-white px-4 py-3.5 text-base outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
                       />
                     </div>

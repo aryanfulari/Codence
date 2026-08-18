@@ -20,7 +20,7 @@ export const testimonials: Testimonial[] = [
     quote: "The voice interview takes ninety seconds and saves us hours later.",
     name: "Marcus T.",
     role: "Tech Lead",
-    repo: "vertex/api-gateway"
+    repo: "vertex/gateway"
   },
   {
     quote: "Finally, PR reasoning that survives past the sprint it shipped in.",

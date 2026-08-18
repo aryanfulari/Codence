@@ -91,7 +91,7 @@ export default function ChatPage() {
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)] lg:text-xl">
           Every answer is grounded in stored decisions and cited by PR, author, and date.
-          {demoMode && " Currently answering from a local demo dataset — connect the backend for live data."}
+          {demoMode && " Currently answering from a local demo dataset. Connect the backend for live data."}
         </p>
       </section>
 

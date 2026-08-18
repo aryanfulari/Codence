@@ -146,8 +146,8 @@ export default function InterviewPage() {
             </h1>
             <p className="max-w-xl text-base leading-7 text-[var(--muted)]">
               {state === "success"
-                ? "Thanks — your reasoning has been captured and will be summarized into a searchable decision record."
-                : "No problem. Interviews never block a merge — you can start one anytime from the PR comment."}
+                ? "Thanks. Your reasoning has been captured and will be summarized into a searchable decision record."
+                : "No problem. Interviews never block a merge. You can start one anytime from the PR comment."}
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-3">
@@ -201,7 +201,7 @@ export default function InterviewPage() {
       <div className="fade-up-delay rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-8 pb-10 shadow-[var(--shadow)] lg:p-10">
         {demoMode && (
           <div className="mb-6 rounded-2xl bg-[#fff3d6] px-4 py-3 text-sm leading-6 text-[#92620a]">
-            Backend not reachable — using fallback questions so you can still try the voice interview.
+            Backend not reachable. Using fallback questions so you can still try the voice interview.
           </div>
         )}
 
