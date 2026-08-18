@@ -84,7 +84,7 @@ export default function ChatPage() {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
-      <section className="fade-up mx-auto max-w-3xl pt-16 pb-10 text-center lg:pt-20">
+      <section className="fade-up mx-auto max-w-3xl pt-8 pb-10 text-center lg:pt-10">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">RAG Chat</p>
         <h1 className="mt-6 text-5xl font-semibold leading-[1.05] text-[var(--foreground)] lg:text-7xl">
           Ask why.

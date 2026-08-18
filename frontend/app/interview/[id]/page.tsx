@@ -171,7 +171,7 @@ export default function InterviewPage() {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
-      <section className="fade-up mx-auto max-w-3xl pt-16 pb-10 text-center lg:pt-20">
+      <section className="fade-up mx-auto max-w-3xl pt-8 pb-10 text-center lg:pt-10">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           PR Interview
         </p>
@@ -289,17 +289,17 @@ export default function InterviewPage() {
           </div>
         </article>
 
-        <div className="mt-8 flex flex-col gap-4 rounded-[1.75rem] bg-[var(--foreground)] p-6 text-white lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-8 flex flex-col gap-4 rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card)] p-6 shadow-[var(--shadow)] lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-white/70">Final action</p>
-            <h3 className="mt-2 text-2xl font-semibold">Submit interview answers</h3>
+            <p className="text-xs uppercase tracking-[0.28em] text-[var(--accent-strong)]">Final action</p>
+            <h3 className="mt-2 text-2xl font-semibold text-[var(--foreground)]">Submit interview answers</h3>
           </div>
 
           <div className="flex flex-wrap gap-3">
             <button
               type="button"
               onClick={handleSkip}
-              className="rounded-2xl border border-white/30 px-5 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10"
+              className="rounded-2xl border border-[var(--card-border)] px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-black/5"
             >
               Skip for now
             </button>
