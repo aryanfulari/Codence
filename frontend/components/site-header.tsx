@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CodenceMark } from "@/components/codence-mark";
 
 const navItems = [
   { href: "/", label: "Landing" },
@@ -16,9 +17,7 @@ export function SiteHeader() {
     <header className="relative z-10 border-b border-[var(--card-border)]">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-2 items-center gap-4 px-6 py-5 sm:grid-cols-[1fr_auto_1fr] lg:px-10">
         <Link href="/" className="flex items-center gap-2.5 justify-self-start">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--foreground)] text-xs font-semibold text-[var(--background)]">
-            C
-          </div>
+          <CodenceMark size={32} className="shrink-0" />
           <p className="text-lg font-semibold whitespace-nowrap text-[var(--foreground)]">
             Codence
           </p>
