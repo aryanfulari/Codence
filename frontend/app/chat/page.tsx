@@ -87,7 +87,7 @@ export default function ChatPage() {
       <section className="fade-up mx-auto max-w-3xl pt-16 pb-10 text-center lg:pt-20">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">RAG Chat</p>
         <h1 className="mt-6 text-5xl font-semibold leading-[1.05] text-[var(--foreground)] lg:text-7xl">
-          Ask Codence why the codebase is the way it is.
+          Ask why.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)] lg:text-xl">
           Every answer is grounded in stored decisions and cited by PR, author, and date.

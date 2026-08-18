@@ -9,19 +9,19 @@ const REPO_PATTERN = /^[\w.-]+\/[\w.-]+$/;
 
 const FEATURES = [
   {
-    title: "Voice-first interviews",
+    title: "Speak it, don't type it",
     description:
       "Answer three AI-generated questions by voice right when the PR is fresh in your head — no forms, no forgetting why you made the call."
   },
   {
-    title: "Smart importance scoring",
+    title: "Only the PRs that matter",
     description:
-      "Codence reads the actual diff and scores it against sensitive paths, new files, and dependency changes — only the PRs that matter trigger an interview."
+      "Codence scores every diff against sensitive paths, new files, and dependency changes, so only real risk triggers a voice interview."
   },
   {
-    title: "Grounded, cited chat",
+    title: "Answers with receipts",
     description:
-      "Ask why the codebase is the way it is and get an answer grounded in stored decisions — cited by PR, author, and date, never a guess."
+      "Every answer comes grounded in stored decisions — cited by PR, author, and date. Never a guess."
   }
 ];
 
@@ -73,15 +73,14 @@ export default function LandingPage() {
     <div className="mx-auto w-full max-w-6xl overflow-x-hidden px-6 lg:px-10">
       <section className="fade-up mx-auto max-w-4xl pt-20 pb-12 text-center lg:pt-28">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
-          Connect your GitHub repo
+          Institutional memory, automated
         </p>
         <h1 className="mt-6 text-6xl font-semibold leading-[1.02] text-[var(--foreground)] lg:text-8xl">
-          Turn every critical pull request into institutional memory.
+          The reasoning behind your code — remembered, not lost.
         </h1>
         <p className="mx-auto mt-8 max-w-2xl text-xl leading-9 text-[var(--muted)] lg:text-2xl">
-          Codence scores every PR, interviews the developer by voice when it
-          matters, and lets your team ask why the codebase is the way it is
-          — with grounded, cited answers.
+          A quick voice interview on the PRs that matter. A searchable
+          record of every reason your codebase looks the way it does.
         </p>
       </section>
 
@@ -209,7 +208,7 @@ export default function LandingPage() {
             Why Codence
           </p>
           <h2 className="mt-3 text-4xl font-semibold text-[var(--foreground)] lg:text-5xl">
-            Built for the moment context usually disappears.
+            Context has a shelf life. Codence extends it.
           </h2>
         </div>
 
@@ -278,7 +277,7 @@ export default function LandingPage() {
             Teams shipping with Codence
           </p>
           <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)] lg:text-4xl">
-            Institutional memory, not tribal knowledge.
+            Knowledge that outlasts the person who wrote it.
           </h2>
         </div>
 
