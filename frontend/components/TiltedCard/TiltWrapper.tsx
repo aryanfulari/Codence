@@ -55,13 +55,13 @@ export function TiltWrapper({
   return (
     <div
       ref={ref}
-      className={className}
+      className={`h-full ${className}`}
       style={{ perspective: "1200px" }}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <motion.div style={{ rotateX, rotateY, scale, transformStyle: "preserve-3d" }}>
+      <motion.div className="h-full" style={{ rotateX, rotateY, scale, transformStyle: "preserve-3d" }}>
         {children}
       </motion.div>
     </div>

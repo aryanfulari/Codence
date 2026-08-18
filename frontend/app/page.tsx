@@ -196,8 +196,8 @@ export default function LandingPage() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           <TiltWrapper className="rounded-[1.75rem]" rotateAmplitude={8} scaleOnHover={1.02}>
-            <div className="overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
-              <div className="feature-mockup-mask h-44 bg-[#f5f4f2] p-4">
+            <div className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
+              <div className="feature-mockup-mask h-44 shrink-0 bg-[#f5f4f2] p-4">
                 <div className="rounded-xl border border-[var(--card-border)] bg-white p-3 shadow-[var(--shadow)]">
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent)]">
                     Question 1 of 3
@@ -222,7 +222,7 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-              <div className="p-8 pt-2">
+              <div className="flex flex-1 flex-col justify-center p-8 pt-2">
                 <h3 className="text-2xl font-semibold text-[var(--foreground)]">
                   Speak it, don&apos;t type it
                 </h3>
@@ -236,8 +236,8 @@ export default function LandingPage() {
           </TiltWrapper>
 
           <TiltWrapper className="rounded-[1.75rem]" rotateAmplitude={8} scaleOnHover={1.02}>
-            <div className="overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
-              <div className="feature-mockup-mask h-44 space-y-2 bg-[#f5f4f2] p-4">
+            <div className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
+              <div className="feature-mockup-mask h-44 shrink-0 space-y-2 bg-[#f5f4f2] p-4">
                 <div className="flex items-center justify-between rounded-xl border border-[var(--card-border)] bg-white px-3 py-2.5 shadow-[var(--shadow)]">
                   <p className="truncate text-xs font-medium text-[var(--foreground)]">
                     Fix retry logic in payment_processor.py
@@ -255,7 +255,7 @@ export default function LandingPage() {
                   </span>
                 </div>
               </div>
-              <div className="p-8 pt-2">
+              <div className="flex flex-1 flex-col justify-center p-8 pt-2">
                 <h3 className="text-2xl font-semibold text-[var(--foreground)]">
                   Only the PRs that matter
                 </h3>
@@ -269,8 +269,8 @@ export default function LandingPage() {
           </TiltWrapper>
 
           <TiltWrapper className="rounded-[1.75rem]" rotateAmplitude={8} scaleOnHover={1.02}>
-            <div className="overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
-              <div className="feature-mockup-mask h-44 space-y-2 bg-[#f5f4f2] p-4">
+            <div className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
+              <div className="feature-mockup-mask h-44 shrink-0 space-y-2 bg-[#f5f4f2] p-4">
                 <div className="flex justify-end">
                   <div className="rounded-xl bg-[var(--foreground)] px-3 py-2 text-xs text-white">
                     Why did we change retry handling?
@@ -284,7 +284,7 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-              <div className="p-8 pt-2">
+              <div className="flex flex-1 flex-col justify-center p-8 pt-2">
                 <h3 className="text-2xl font-semibold text-[var(--foreground)]">
                   Answers with receipts
                 </h3>

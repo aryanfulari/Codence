@@ -48,7 +48,20 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="hidden justify-self-end sm:block" aria-hidden />
+        <div className="flex items-center justify-end gap-2 justify-self-end sm:gap-3">
+          <Link
+            href="/login"
+            className="whitespace-nowrap text-xs font-medium text-[var(--muted)] transition hover:text-[var(--foreground)] sm:text-sm"
+          >
+            Log in
+          </Link>
+          <Link
+            href="/signup"
+            className="whitespace-nowrap rounded-full bg-[var(--foreground)] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[var(--accent-strong)] sm:px-4 sm:py-2 sm:text-sm"
+          >
+            Sign up
+          </Link>
+        </div>
       </div>
     </header>
   );
