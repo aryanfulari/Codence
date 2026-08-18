@@ -204,9 +204,20 @@ export default function LandingPage() {
                 <p className="mt-1.5 text-sm font-semibold text-[var(--foreground)]">
                   What problem does this change solve?
                 </p>
-                <div className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-[#b3261e]/30 bg-[#fdeceb] px-2.5 py-1 text-[10px] font-semibold text-[#b3261e]">
-                  <span className="pulse-dot" aria-hidden />
-                  Recording
+                <div className="mt-2.5 flex items-center gap-2">
+                  <span className="waveform" aria-hidden>
+                    {[0, 1, 2, 3, 4, 5, 6].map((bar) => (
+                      <span
+                        key={bar}
+                        className="waveform-bar"
+                        style={{ animationDelay: `${bar * 0.12}s` }}
+                      />
+                    ))}
+                  </span>
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-[#b3261e]/30 bg-[#fdeceb] px-2.5 py-1 text-[10px] font-semibold text-[#b3261e]">
+                    <span className="pulse-dot" aria-hidden />
+                    Recording
+                  </div>
                 </div>
               </div>
             </div>
