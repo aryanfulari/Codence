@@ -80,3 +80,92 @@ export async function summarizeTranscript(questions, answers) {
     return fallbackSummary;
   }
 }
+
+/**
+ * Calls the Gemini embeddings API on the given text.
+ * @param {string} summaryText
+ * @returns {Promise<number[]>} - The embedding vector for ChromaDB store_decision()
+ */
+export async function embedSummary(summaryText) {
+  try {
+    const response = await ai.models.embedContent({
+      model: 'gemini-embedding-001',
+      contents: summaryText
+    });
+    return response.embeddings[0].values;
+  } catch (error) {
+    console.error("Embedding API ERROR:", error);
+    return [];
+  }
+}
+
+/**
+ * Assembles the full decision object that gets stored.
+ * @param {Object} fields - The pieces to assemble
+ * @param {string[]} fields.files_changed - Array of changed file paths
+ * @returns {Object} - The full decision object
+ */
+export function buildDecisionRecord({
+  pr_url,
+  pr_title,
+  repo,
+  files_changed,
+  author,
+  timestamp,
+  importance_score,
+  trigger_reason,
+  interview_questions,
+  raw_transcript,
+  ai_summary,
+  embedding_vector,
+  tags = []
+}) {
+  return {
+    pr_url,
+    pr_title,
+    repo,
+    files_changed,
+    author,
+    timestamp,
+    importance_score,
+    trigger_reason,
+    interview_questions,
+    raw_transcript,
+    ai_summary,
+    embedding_vector,
+    tags
+  };
+}
+
+/**
+ * Generates an answer to a question using retrieved decisions as context.
+ * @param {string} question
+ * @param {Array} retrievedDecisions
+ * @returns {Promise<string>}
+ */
+export async function generateAnswer(question, retrievedDecisions) {
+  if (!retrievedDecisions || retrievedDecisions.length === 0) {
+    return "No recorded decision found for this query.";
+  }
+
+  const contextStr = retrievedDecisions.map(d => 
+    `Decision Summary: ${d.ai_summary}\npr_url: ${d.pr_url}\nauthor: ${d.author}`
+  ).join('\n\n');
+
+  const prompt = `Using ONLY the following recorded decisions, answer the question. Cite each source by its PR URL and author. Reproduce the pr_url and author EXACTLY as given, character for character — do not paraphrase or alter URLs. If the decisions don't actually answer the question, say so honestly instead of guessing.\n\nContext:\n${contextStr}\n\nQuestion: ${question}`;
+
+  try {
+    const response = await ai.models.generateContent({
+        model: 'gemini-3.6-flash',
+        contents: prompt
+    });
+
+    if (response.text && typeof response.text === 'string') {
+        return response.text.trim();
+    }
+    return "Could not generate an answer.";
+  } catch (error) {
+    console.error("generateAnswer API ERROR:", error);
+    return "Error generating answer.";
+  }
+}

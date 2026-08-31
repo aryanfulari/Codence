@@ -1,5 +1,6 @@
 import 'dotenv/config';
-import { generateQuestions, summarizeTranscript } from '../services/gemini.js';
+import { generateQuestions, summarizeTranscript, embedSummary, buildDecisionRecord, generateAnswer } from '../services/gemini.js';
+import { store_decision } from '../services/chromaStub.js';
 
 async function runTests() {
   console.log("=== Testing generateQuestions ===");
@@ -58,6 +59,59 @@ async function runTests() {
   } else {
       console.log("\n❌ FAIL: Summary is empty.");
   }
+
+  console.log("\n=== Testing Day-2 Pipeline (End-to-End) ===");
+  console.log("1. Faking an interview submission...");
+  const fakeMetadata = {
+    pr_url: "https://github.com/org/repo/pull/123",
+    pr_title: "Refactor database connection pool",
+    repo: "org/repo",
+    files_changed: ["src/auth.js", "config/db.js"],
+    author: "alice_dev",
+    timestamp: new Date().toISOString(),
+    importance_score: 8,
+    trigger_reason: "High complexity PR",
+    interview_questions: ["Why refactor this?", "What were alternatives?", "Any risks?"],
+    raw_transcript: "Q: Why refactor this?\nA: We were leaking connections.\nQ: What were alternatives?\nA: Doing it per request, but that is too slow.\nQ: Any risks?\nA: Maybe timeouts need tweaking.",
+    tags: ["database", "performance"]
+  };
+
+  console.log("2. Generating summary...");
+  const pipelineSummary = await summarizeTranscript(fakeMetadata.interview_questions, ["We were leaking connections.", "Doing it per request, but that is too slow.", "Maybe timeouts need tweaking."]);
+  
+  console.log("3. Generating embeddings...");
+  const pipelineVector = await embedSummary(pipelineSummary);
+
+  console.log("4. Building decision record...");
+  const decisionRecord = buildDecisionRecord({
+    ...fakeMetadata,
+    ai_summary: pipelineSummary,
+    embedding_vector: pipelineVector
+  });
+
+  console.log("5. Storing decision in ChromaDB stub...");
+  await store_decision(decisionRecord);
+
+  console.log("\nStored Record (Summary):");
+  console.log(JSON.stringify({
+    ...decisionRecord,
+    embedding_vector: `[Array of ${decisionRecord.embedding_vector.length} numbers]`
+  }, null, 2));
+
+  if (decisionRecord.embedding_vector.length > 0 && decisionRecord.ai_summary) {
+    console.log("✅ PASS: Pipeline stored successfully.");
+  } else {
+    console.log("❌ FAIL: Pipeline failed to generate vector or summary.");
+  }
+
+  console.log("\n=== Testing generateAnswer ===");
+  console.log("1. Testing with fake decision context...");
+  const answerWithContext = await generateAnswer("Why did we refactor the connection pool?", [decisionRecord]);
+  console.log("Answer:", answerWithContext);
+
+  console.log("\n2. Testing with empty context...");
+  const answerEmpty = await generateAnswer("Why did we refactor the connection pool?", []);
+  console.log("Answer:", answerEmpty);
 }
 
 runTests().catch(err => {
