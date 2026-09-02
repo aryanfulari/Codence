@@ -2,9 +2,6 @@
 
 > *"GitHub remembers what changed. MetaWiz remembers why."*
 
-**Team:** Meghana · Aryan · Suzanne · Ruchira  
-**Inception Hackathon — August 8, 2026**
-
 ---
 
 ## Table of Contents
@@ -209,47 +206,125 @@ For the hackathon demo, we run Local AI on the M5 Mac.
 
 ## 9. Architecture
 
+### High-Level System Diagram
+
+```mermaid
+flowchart TB
+    subgraph GitHub["GitHub (External)"]
+        PR["PR Opened"]
+        GHAPI["GitHub API"]
+    end
+
+    subgraph NextJS["Next.js Application (Node.js)"]
+        subgraph Frontend["Frontend (React)"]
+            Landing["Landing Page"]
+            Interview["Interview Shell"]
+            Chat["Chat Shell"]
+        end
+
+        subgraph APIRoutes["API Routes (Backend)"]
+            Webhook["Webhook Handler<br/>/api/webhook"]
+            Scoring["Importance Scoring<br/>/api/score"]
+            GenQ["Question Generator<br/>/api/interview/questions"]
+            Summarize["Transcript Summarizer<br/>/api/interview/summarize"]
+            RAGChat["RAG Chat<br/>/api/chat"]
+            OAuth["GitHub OAuth<br/>/api/auth"]
+        end
+    end
+
+    subgraph External["External Services"]
+        ChromeDB["ChromaDB<br/>(Local Vector DB)"]
+        OllamaMistral["Ollama + Mistral 7B<br/>(Local AI)"]
+        GeminiAPI["Gemini API<br/>(Cloud AI)"]
+        Voice["Browser Speech API<br/>(Voice Capture)"]
+    end
+
+    PR -->|"Webhook: PR opened"| Webhook
+    Webhook -->|"Fetch PR details"| GHAPI
+    Webhook --> Scoring
+    Scoring -->|"Score ≥ 50?"| GenQ
+    Scoring -->|"Score < 50"| Landing
+    
+    GenQ -->|"3 specific questions"| Interview
+    Interview -->|"Voice answers"| Voice
+    Voice -->|"Transcript"| Summarize
+    Summarize -->|"AI summary + embedding"| ChromeDB
+    
+    Chat -->|"User question"| RAGChat
+    RAGChat -->|"Embed + semantic search"| ChromeDB
+    RAGChat -->|"Retrieved decisions + question"| OllamaMistral
+    RAGChat -->|"Retrieved decisions + question"| GeminiAPI
+    
+    OAuth --> GHAPI
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        MetaWiz AI Architecture                   │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ┌──────────┐    ┌──────────────┐    ┌───────────────────┐      │
-│  │  GitHub   │───▶│   Webhook    │───▶│  Importance       │      │
-│  │   PR      │    │   Handler    │    │  Scoring Engine   │      │
-│  └──────────┘    └──────────────┘    └─────────┬─────────┘      │
-│                                                 │                │
-│                                      Score ≥ 50?│                │
-│                                                 ▼                │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │                    Voice Interview Flow                    │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐ │   │
-│  │  │ Generate  │─▶│ Browser  │─▶│  Trans-  │─▶│    AI    │ │   │
-│  │  │Questions  │  │ Speech   │  │  cription│  │ Summarize│ │   │
-│  │  │(Gemini/  │  │   API    │  │          │  │          │ │   │
-│  │  │ Ollama)  │  │          │  │          │  │          │ │   │
-│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘ │   │
-│  └──────────────────────────────────────────────────────────┘   │
-│                                                 │                │
-│                                                 ▼                │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │                   ChromaDB (Local)                         │   │
-│  │  ┌────────────┐  ┌────────────┐  ┌───────────────────┐  │   │
-│  │  │   Text     │  │ Embedding  │  │     Metadata      │  │   │
-│  │  │  Storage   │  │   Vector   │  │  (PR, Author, etc)│  │   │
-│  │  └────────────┘  └────────────┘  └───────────────────┘  │   │
-│  └──────────────────────────────────────────────────────────┘   │
-│                              │                                   │
-│                              ▼                                   │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │                    RAG Chat Interface                      │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐ │   │
-│  │  │  User    │─▶│  Embed   │─▶│  Search  │─▶│   AI     │ │   │
-│  │  │ Question │  │ Question │  │ ChromaDB │  │  Answer  │ │   │
-│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘ │   │
-│  └──────────────────────────────────────────────────────────┘   │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+
+### Voice Interview Flow
+
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant PR as GitHub PR
+    participant Next as Next.js API Routes
+    participant AI as AI Model (Ollama/Gemini)
+    participant DB as ChromaDB
+
+    Dev->>PR: Opens PR
+    PR->>Next: Webhook: PR opened
+    Next->>Next: Score PR (rule-based)
+    alt Score >= 50
+        Next->>PR: Post interview link comment
+        Dev->>Next: Click interview link
+        Next->>AI: Generate 3 questions from diff
+        AI-->>Next: Return questions
+        Next-->>Dev: Show voice interview
+        Dev->>Next: Answer via Browser Speech API
+        Next->>AI: Summarize transcript
+        AI-->>Next: Return structured decision
+        Next->>DB: Store text + embedding + metadata
+    else Score < 50
+        Next-->>Dev: No interview triggered
+    end
+```
+
+### RAG-Powered Chat Flow
+
+```mermaid
+sequenceDiagram
+    participant User as Teammate
+    participant Next as Next.js API Routes
+    participant DB as ChromaDB
+    participant AI as AI Model (Ollama/Gemini)
+
+    User->>Next: "Why did we remove retry logic in payments?"
+    Next->>Next: Embed the question
+    Next->>DB: Semantic search (top 2-3 decisions)
+    DB-->>Next: Return relevant decisions + metadata
+    Next->>AI: "Using ONLY these decisions, answer with citations"
+    AI-->>Next: Grounded, cited answer
+    Next-->>User: Answer + PR links + author + date
+```
+
+### Data Flow Diagram
+
+```mermaid
+flowchart LR
+    subgraph Store["Phase 1: Store Decisions"]
+        A["Voice Interview"] --> B["Transcript"]
+        B --> C["AI Summarization"]
+        C --> D["Embedding Generation"]
+        D --> E["ChromaDB (Local File)"]
+    end
+
+    subgraph Query["Phase 2: Answer Questions"]
+        F["User Question"] --> G["Embed Question"]
+        G --> H["Semantic Search"]
+        E --> H
+        H --> I["Top 2-3 Decisions"]
+        I --> J["AI Generates Answer"]
+        J --> K["Cited Answer"]
+    end
+
+    E --- H
 ```
 
 ### Next.js + Node.js — Why Both?
@@ -265,10 +340,26 @@ For the hackathon demo, we run Local AI on the M5 Mac.
 
 **For this project:**
 
-```
-Frontend (Next.js) ←→ API Routes (Next.js) ←→ ChromaDB + Ollama/Gemini
-                            ↑
-                    GitHub Webhooks
+```mermaid
+flowchart LR
+    subgraph Browser["Browser"]
+        UI["React UI<br/>(app/)"]
+    end
+
+    subgraph Next["Next.js Server"]
+        API["API Routes<br/>(app/api/)"]
+    end
+
+    subgraph Services["External Services"]
+        VDB["ChromaDB"]
+        AI["Ollama / Gemini"]
+        GH["GitHub API + Webhooks"]
+    end
+
+    UI <-->|"HTTP"| API
+    API <-->|"store / retrieve"| VDB
+    API <-->|"generate / summarize / answer"| AI
+    API <-->|"OAuth / webhooks"| GH
 ```
 
 - **`app/`** — Your React pages (landing, interview, chat)
@@ -366,41 +457,7 @@ Every captured decision saves these fields in ChromaDB:
 
 ---
 
-## 12. Roadmap
-
-### Building for Real (MVP)
-
-- [x] GitHub OAuth — connect your repo
-- [x] Webhook trigger on PR opened
-- [x] Importance scoring (rule-based, tiered)
-- [x] AI-generated voice interview questions (Gemini API for dev, Ollama for demo)
-- [x] Voice capture via browser Speech API
-- [x] AI summarization of transcript
-- [x] ChromaDB storage with embeddings
-- [x] RAG-powered chat with citations
-- [x] PR comment bot posting the interview link
-- [x] Manual "Explain this decision" override button
-
-### Future Roadmap
-
-- [ ] Knowledge graph view of connected decisions
-- [ ] Historical decision timeline
-- [ ] Multi-repo support
-- [ ] Onboarding digest for new hires
-- [ ] AI sanity-check layer on top of importance scoring
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute to MetaWiz AI.
-
 ## License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- Built at the **Inception Hackathon — August 8, 2026**
-- Team: Meghana · Aryan · Suzanne · Ruchira
-- Thanks to the Ollama, ChromaDB, and Next.js communities
