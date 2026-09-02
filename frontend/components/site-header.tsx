@@ -16,7 +16,7 @@ export function SiteHeader() {
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
-              MetaWiz AI
+              Codence
             </p>
             <p className="text-lg font-semibold text-[var(--foreground)]">
               Decision Memory

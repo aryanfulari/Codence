@@ -1,13 +1,13 @@
-# MetaWiz AI — Your Codebase's Institutional Memory
+# Codence — Your Codebase's Institutional Memory
 
-> *"GitHub remembers what changed. MetaWiz remembers why."*
+> *"GitHub remembers what changed. Codence remembers why."*
 
 ---
 
 ## Table of Contents
 
 1. [The Problem](#1-the-problem)
-2. [The Solution — MetaWiz AI](#2-the-solution--metawiz-ai)
+2. [The Solution — Codence](#2-the-solution--Codence)
 3. [Key Features](#3-key-features)
 4. [How the AI Actually Works — RAG Explained](#4-how-the-ai-actually-works--rag-explained)
 5. [ChromaDB — The Local Knowledge Store](#5-chromadb--the-local-knowledge-store)
@@ -17,8 +17,6 @@
 9. [Architecture](#9-architecture)
 10. [Getting Started](#10-getting-started)
 11. [What Gets Stored Per Decision](#11-what-gets-stored-per-decision)
-12. [Roadmap](#12-roadmap)
-
 ---
 
 ## 1. The Problem
@@ -35,21 +33,21 @@ PR descriptions say *what* changed. Nobody writes *why*.
 
 ---
 
-## 2. The Solution — MetaWiz AI
+## 2. The Solution — Codence
 
-MetaWiz captures the reasoning behind code decisions **at the moment they're made**, stores them as a searchable knowledge base, and lets anyone on the team ask questions about why the codebase is the way it is — and get **grounded, cited answers**.
+Codence captures the reasoning behind code decisions **at the moment they're made**, stores them as a searchable knowledge base, and lets anyone on the team ask questions about why the codebase is the way it is — and get **grounded, cited answers**.
 
 ### The Full Flow
 
 | Step | What happens |
 |------|-------------|
 | 1. PR opened | Developer opens a PR on GitHub |
-| 2. Importance score | MetaWiz analyses the PR — files touched, lines changed, keywords — and scores it 0-100 |
+| 2. Importance score | Codence analyses the PR — files touched, lines changed, keywords — and scores it 0-100 |
 | 3. Interview triggered | If score ≥ 50, a bot posts a comment on the PR with an interview link |
 | 4. Voice interview | Developer clicks the link, answers 3 AI-generated questions about the decision via voice |
-| 5. AI summarization | MetaWiz transcribes the answers and summarizes them into a structured decision record |
+| 5. AI summarization | Codence transcribes the answers and summarizes them into a structured decision record |
 | 6. Stored locally | The decision (text + meaning fingerprint) is saved to a local database — nothing leaves the machine |
-| 7. Searchable forever | Anyone can open MetaWiz chat and ask *"why did we do X?"* and get a grounded, cited answer |
+| 7. Searchable forever | Anyone can open Codence chat and ask *"why did we do X?"* and get a grounded, cited answer |
 
 ---
 
@@ -57,7 +55,7 @@ MetaWiz captures the reasoning behind code decisions **at the moment they're mad
 
 ### Smart Importance Scoring
 
-Not every PR needs an interview. MetaWiz scores each PR using a rule-based system:
+Not every PR needs an interview. Codence scores each PR using a rule-based system:
 
 - Files touched
 - Sensitivity of directories (`auth/`, `payments/`, `config/`)
@@ -69,14 +67,14 @@ Only PRs scoring **≥ 50** trigger an interview. A manual override button alway
 
 ### AI-Generated Voice Interview
 
-The interview questions aren't generic. MetaWiz reads the actual PR diff and generates **3 specific questions** grounded in what changed — e.g. *"I see you changed the retry logic in payment_processor.py — what drove that decision?"*
+The interview questions aren't generic. Codence reads the actual PR diff and generates **3 specific questions** grounded in what changed — e.g. *"I see you changed the retry logic in payment_processor.py — what drove that decision?"*
 
 - If the AI call fails, it silently falls back to 3 solid default questions
 - The interview is async, skippable, and never blocks a merge
 
 ### RAG-Powered Chat
 
-When a teammate asks a question, MetaWiz doesn't guess:
+When a teammate asks a question, Codence doesn't guess:
 
 1. It searches the stored decisions **by meaning** (not just keywords)
 2. Retrieves the top 2-3 most relevant ones
@@ -86,7 +84,7 @@ When a teammate asks a question, MetaWiz doesn't guess:
 
 ### Fully Local, Fully Private
 
-MetaWiz runs entirely on your machine:
+Codence runs entirely on your machine:
 
 - **AI model:** Mistral 7B via Ollama (runs locally)
 - **Decision database:** ChromaDB (local folder)
@@ -101,13 +99,13 @@ For teams that prefer convenience over privacy:
 - Supports cloud API mode (Gemini/OpenAI)
 - User brings their own API key
 - Setup takes 2 minutes
-- MetaWiz asks on first launch which mode you prefer — switch anytime
+- Codence asks on first launch which mode you prefer — switch anytime
 
 ---
 
 ## 4. How the AI Actually Works — RAG Explained
 
-MetaWiz uses **RAG — Retrieval Augmented Generation**.
+Codence uses **RAG — Retrieval Augmented Generation**.
 
 ### The Open-Book Exam Analogy
 
@@ -140,7 +138,7 @@ MetaWiz uses **RAG — Retrieval Augmented Generation**.
 
 ## 5. ChromaDB — The Local Knowledge Store
 
-ChromaDB is the database that powers MetaWiz's search. Unlike a normal database that only finds exact matches, ChromaDB searches **by meaning** — so *"why did we change the login system"* finds a decision that says *"switched auth library due to CVE,"* even though they share zero words.
+ChromaDB is the database that powers Codence's search. Unlike a normal database that only finds exact matches, ChromaDB searches **by meaning** — so *"why did we change the login system"* finds a decision that says *"switched auth library due to CVE,"* even though they share zero words.
 
 - Installed with one command
 - Runs as a local folder on the machine
@@ -168,7 +166,7 @@ ChromaDB is the database that powers MetaWiz's search. Unlike a normal database 
 | **Best for** | Privacy-first teams, enterprises, sensitive code | Startups, quick setup, any laptop |
 | **Model quality** | Very good (Mistral 7B) | Excellent (Gemini Pro) |
 
-**MetaWiz's approach:** On first launch, ask the user to choose. Default to Local AI for maximum privacy. Let them switch anytime.
+**Codence's approach:** On first launch, ask the user to choose. Default to Local AI for maximum privacy. Let them switch anytime.
 
 For the hackathon demo, we run Local AI on the M5 Mac.
 
@@ -191,7 +189,7 @@ For the hackathon demo, we run Local AI on the M5 Mac.
 
 ## 8. How We're Different From Existing Tools
 
-| | MetaWiz | Swimm | Falconer |
+| | Codence | Swimm | Falconer |
 |---|---------|-------|----------|
 | **How it captures reasoning** | Voice interview at PR time | Infers from code + old docs | Mines Slack threads |
 | **When it captures** | In the moment, real-time | After the fact, retroactive | After the fact |
@@ -200,7 +198,7 @@ For the hackathon demo, we run Local AI on the M5 Mac.
 | **Trigger** | PR webhook | Manual | Manual |
 | **Free to run** | Yes, with Ollama | Paid product | Paid product |
 
-> **The one-line wedge:** Swimm and Falconer guess why decisions were made, after the fact. MetaWiz captures it in the developer's own spoken words, at the moment it happens. That's the difference between a reconstruction and a recording.
+> **The one-line wedge:** Swimm and Falconer guess why decisions were made, after the fact. Codence captures it in the developer's own spoken words, at the moment it happens. That's the difference between a reconstruction and a recording.
 
 ---
 
@@ -382,8 +380,8 @@ flowchart LR
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-team/metawiz-ai.git
-cd metawiz-ai
+git clone https://github.com/your-team/Codence.git
+cd Codence
 
 # 2. Install frontend dependencies
 npm install
@@ -448,7 +446,7 @@ Every captured decision saves these fields in ChromaDB:
 | `author` | Who made the decision |
 | `timestamp` | When the decision was captured |
 | `importance_score` | The PR's importance score |
-| `trigger_reason` | Why MetaWiz flagged this PR |
+| `trigger_reason` | Why Codence flagged this PR |
 | `interview_questions` | The 3 questions the AI generated |
 | `raw_transcript` | The developer's exact spoken words |
 | `ai_summary` | Condensed, structured version of the decision |
