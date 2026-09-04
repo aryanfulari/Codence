@@ -12,7 +12,7 @@ export default function ChatPage() {
             RAG Chat Shell
           </p>
           <h1 className="mt-3 text-4xl font-semibold text-[var(--foreground)]">
-            Ask MetaWiz why the codebase is the way it is.
+            Ask Codence why the codebase is the way it is.
           </h1>
           <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--muted)]">
             This page is ready for Day 3 integration. For now it shows the final
@@ -30,7 +30,7 @@ export default function ChatPage() {
             </h2>
             <p className="mt-4 text-base leading-7 text-[var(--muted)]">
               Ask a grounded question like “Why did we change payment retry
-              handling?” and MetaWiz will respond with cited decisions from stored
+              handling?” and Codence will respond with cited decisions from stored
               PR interviews.
             </p>
 
@@ -58,7 +58,7 @@ export default function ChatPage() {
               type="button"
               className="rounded-2xl bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-strong)]"
             >
-              Ask MetaWiz
+              Ask Codence
             </button>
           </div>
         </div>

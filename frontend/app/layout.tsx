@@ -3,8 +3,8 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  title: "MetaWiz AI",
-  description: "Frontend shell for MetaWiz AI hackathon flow."
+  title: "Codence",
+  description: "Frontend shell for Codence hackathon flow."
 };
 
 export default function RootLayout({
