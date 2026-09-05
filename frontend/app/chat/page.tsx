@@ -1,8 +1,10 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { askChat, ChatCitation } from "@/lib/api";
 import { searchSeededDecisions } from "@/lib/seeded-decisions";
+import { ChatInput } from "@/components/ChatInput";
 
 type ChatMessage = {
   id: string;
@@ -77,16 +79,11 @@ export default function ChatPage() {
     }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    void sendQuery(input);
-  }
-
   return (
     <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
       <section className="fade-up mx-auto max-w-3xl pt-8 pb-10 text-center lg:pt-10">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">RAG Chat</p>
-        <h1 className="mt-6 text-5xl font-semibold leading-[1.05] text-[var(--foreground)] lg:text-7xl">
+        <h1 className="mt-6 text-3xl font-semibold leading-[1.1] text-[var(--foreground)] sm:text-4xl sm:leading-[1.05] md:text-5xl lg:text-7xl">
           Ask why.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)] lg:text-xl">
@@ -99,17 +96,18 @@ export default function ChatPage() {
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto">
           {messages.length === 0 ? (
             <div className="fade-up-delay flex flex-1 items-center justify-center">
-              <div className="w-full max-w-3xl rounded-[1.75rem] border border-dashed border-[var(--card-border)] bg-white/80 p-8 text-center">
-                <p className="text-sm uppercase tracking-[0.28em] text-[var(--muted)]">Empty state</p>
-                <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)]">
+              <div className="group relative overflow-hidden w-full max-w-3xl rounded-[1.75rem] border border-dashed border-[var(--card-border)] bg-white/80 p-8 text-center">
+                <span className="hover-glow wash-sky-mint" aria-hidden />
+                <p className="relative z-[1] text-sm uppercase tracking-[0.28em] text-[var(--muted)]">Empty state</p>
+                <h2 className="relative z-[1] mt-3 text-3xl font-semibold text-[var(--foreground)]">
                   No decision retrieved yet
                 </h2>
-                <p className="mt-4 text-base leading-7 text-[var(--muted)]">
+                <p className="relative z-[1] mt-4 text-base leading-7 text-[var(--muted)]">
                   Ask a grounded question like the ones below and Codence will respond with
                   cited decisions from stored PR interviews.
                 </p>
 
-                <div className="mt-6 grid gap-3 text-left">
+                <div className="relative z-[1] mt-6 grid gap-3 text-left">
                   {SUGGESTED_QUESTIONS.map((question) => (
                     <button
                       key={question}
@@ -126,8 +124,11 @@ export default function ChatPage() {
           ) : (
             <>
               {messages.map((message) => (
-                <div
+                <motion.div
                   key={message.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                   className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
@@ -154,7 +155,7 @@ export default function ChatPage() {
                       </div>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
               {isSending && (
                 <div className="flex justify-start">
@@ -170,27 +171,15 @@ export default function ChatPage() {
           )}
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="fade-up-delay-2 mt-auto rounded-[1.75rem] border border-[var(--card-border)] bg-white/90 p-4"
-        >
-          <div className="flex flex-col gap-4 lg:flex-row">
-            <input
-              type="text"
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              placeholder="Ask why a change was made, what tradeoffs were considered, or what risk was noted..."
-              className="min-h-14 flex-1 rounded-2xl border border-[var(--card-border)] bg-[#fcfbf8] px-4 py-3 outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
-            />
-            <button
-              type="submit"
-              disabled={isSending || !input.trim()}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {isSending ? "Asking..." : "Ask Codence"}
-            </button>
-          </div>
-        </form>
+        <div className="fade-up-delay-2 mt-auto pt-6">
+          <ChatInput
+            value={input}
+            onChange={setInput}
+            onSend={(query) => void sendQuery(query)}
+            disabled={isSending}
+            placeholder="Ask why a change was made, what tradeoffs were considered, or what risk was noted..."
+          />
+        </div>
       </div>
     </div>
   );
