@@ -1,23 +1,159 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f4f2;
-  --foreground: #16150f;
-  --muted: #6b6a62;
-  --card: #ffffff;
-  --card-border: rgba(22, 21, 15, 0.1);
-  --accent: #b45309;
-  --accent-strong: #92400e;
-  --accent-soft: #fef3c7;
-  --hero: #fbbf24;
-  --shadow: 0 24px 60px rgba(22, 21, 15, 0.1);
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  /* Monad style-guide theme — applied site-wide. */
+  --background: #f6f3f1;
+  --foreground: #242424;
+  --muted: #797776;
+  --card: #f6f3f1;
+  --card-border: #cecac8;
+  --accent: #2b59d1;
+  --accent-strong: #1e3f9c;
+  --accent-soft: #cfdaf5;
+  --hero: #2b59d1;
+  --shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  --wash-coral: #ff9473;
+  --wash-sky: #a0b5eb;
+  --wash-mint: #a7fccd;
+  --wash-gold: #ecda98;
+  --periwinkle: #cfdaf5;
+  --matte-graphite: #4e4d4d;
+  --matte-smoke: #797776;
+  --matte-ash: #cecac8;
+  --font-display: var(--font-monad-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-monad-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-mono: var(--font-monad-mono), ui-monospace, "SFMono-Regular", monospace;
 }
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  letter-spacing: -0.01em;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400 !important;
+  letter-spacing: -0.02em;
+}
+
+.rounded-2xl,
+.rounded-\[1\.75rem\] {
+  border-radius: 2.5rem;
+}
+
+button,
+input {
+  border-radius: 9999px !important;
+}
+
+textarea {
+  border-radius: 1.5rem;
+}
+
+/* Monad-style atmospheric gradient washes — soft blurred color blobs used
+   as decoration behind hero/feature content. Never sharp-edged. */
+.wash {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wash-coral-sky {
+  background: radial-gradient(
+    circle at 30% 30%,
+    color-mix(in srgb, var(--wash-coral) 55%, var(--background)),
+    color-mix(in srgb, var(--wash-sky) 55%, var(--background)) 70%
+  );
+}
+
+.wash-sky-mint {
+  background: radial-gradient(
+    circle at 60% 40%,
+    color-mix(in srgb, var(--wash-sky) 55%, var(--background)),
+    color-mix(in srgb, var(--wash-mint) 55%, var(--background)) 70%
+  );
+}
+
+.wash-gold-coral {
+  background: radial-gradient(
+    circle at 40% 60%,
+    color-mix(in srgb, var(--wash-gold) 55%, var(--background)),
+    color-mix(in srgb, var(--wash-coral) 55%, var(--background)) 70%
+  );
+}
+
+.wash-coral-gold {
+  background: radial-gradient(
+    circle at 50% 30%,
+    color-mix(in srgb, var(--wash-coral) 55%, var(--background)),
+    color-mix(in srgb, var(--wash-gold) 55%, var(--background)) 70%
+  );
+}
+
+/* Richer, accent-tied glow reserved for the "See it in action" showcase
+   card — ties back to the real Lake Blue accent instead of the purely
+   decorative pastel wash used on the plain feature cards. */
+.wash-accent-gold {
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--accent) 45%, var(--background)),
+    color-mix(in srgb, var(--wash-gold) 55%, var(--background)) 75%
+  );
+}
+
+/* Hover glow — sits behind a tilt card, only shows once the card is
+   actually being interacted with, instead of sitting on the page at rest. */
+.hover-glow {
+  position: absolute;
+  inset: -15%;
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.group:hover .hover-glow {
+  opacity: 0.25;
+}
+
+/* Tight glow that hugs the waveform + recording indicator, pulsing in
+   sync with the recording animation instead of sitting still. */
+.wash-live {
+  position: absolute;
+  inset: -10px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--wash-coral) 55%, var(--background)),
+    color-mix(in srgb, var(--wash-gold) 55%, var(--background)) 65%,
+    transparent 80%
+  );
+  filter: blur(18px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  animation: washLivePulse 0.9s ease-in-out infinite;
+}
+
+@keyframes washLivePulse {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(0.95);
+  }
+
+  50% {
+    opacity: 0.38;
+    transform: scale(1.05);
+  }
 }
 
 html {
@@ -64,6 +200,19 @@ body {
 .feature-mockup-mask {
   mask-image: linear-gradient(to bottom, black 55%, transparent 96%);
   -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 96%);
+}
+
+/* Scroll-triggered reveal (see components/ScrollReveal.tsx) — starts
+   hidden and only animates in once it actually scrolls into view. */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .fade-up {
