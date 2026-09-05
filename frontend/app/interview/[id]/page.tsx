@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { fetchInterview, submitInterview } from "@/lib/api";
+import { ApiError, fetchInterview, submitInterview } from "@/lib/api";
 
 const FALLBACK_QUESTIONS = [
   "What problem does this change solve?",
@@ -18,11 +18,13 @@ export default function InterviewPage() {
   const id = params.id;
 
   const [prTitle, setPrTitle] = useState("Improve scoring for risky architectural changes");
+  const [prUrl, setPrUrl] = useState<string | undefined>(undefined);
   const [questions, setQuestions] = useState<string[]>(FALLBACK_QUESTIONS);
   const [answers, setAnswers] = useState<string[]>(FALLBACK_QUESTIONS.map(() => ""));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [demoMode, setDemoMode] = useState(false);
+  const [notFound, setNotFound] = useState(false);
   const [state, setState] = useState<LoadState>("loading");
   const [speechSupported, setSpeechSupported] = useState(true);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
@@ -33,13 +35,21 @@ export default function InterviewPage() {
       .then((data) => {
         if (cancelled) return;
         setPrTitle(data.prTitle);
+        setPrUrl(data.prUrl);
         setQuestions(data.questions);
         setAnswers(data.questions.map(() => ""));
         setState("ready");
       })
-      .catch(() => {
+      .catch((err) => {
         if (cancelled) return;
-        setDemoMode(true);
+        // A 404 means the backend is reachable but has no interview with
+        // this ID (e.g. it was never seeded, or was already submitted) —
+        // a different situation from the backend not responding at all.
+        if (err instanceof ApiError && err.status === 404) {
+          setNotFound(true);
+        } else {
+          setDemoMode(true);
+        }
         setState("ready");
       });
     return () => {
@@ -175,30 +185,50 @@ export default function InterviewPage() {
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           PR Interview
         </p>
-        <h1 className="mt-6 text-5xl font-semibold leading-[1.05] text-[var(--foreground)] lg:text-7xl">
+        <h1 className="mt-6 text-3xl font-semibold leading-[1.1] text-[var(--foreground)] sm:text-4xl sm:leading-[1.05] md:text-5xl lg:text-7xl">
           {prTitle}
         </h1>
         <p className="mt-6 text-lg leading-8 text-[var(--muted)] lg:text-xl">
           Interview ID: <span className="font-mono font-medium text-[var(--foreground)]">{id}</span>
         </p>
+        {prUrl && (
+          <a
+            href={prUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 inline-block text-sm font-medium text-[var(--accent-strong)] hover:underline"
+          >
+            View pull request on GitHub →
+          </a>
+        )}
 
         <div className="mx-auto mt-8 grid max-w-md gap-3 text-sm text-[var(--muted)] sm:grid-cols-2">
-          <div className="rounded-2xl border border-[var(--card-border)] bg-white/80 px-4 py-3">
-            <p className="uppercase tracking-[0.22em]">Progress</p>
-            <p className="mt-2 font-semibold text-[var(--foreground)]">
+          <div className="group relative overflow-hidden rounded-2xl border border-[var(--card-border)] bg-white/80 px-4 py-3">
+            <span className="hover-glow wash-coral-sky" aria-hidden />
+            <p className="relative z-[1] uppercase tracking-[0.22em]">Progress</p>
+            <p className="relative z-[1] mt-2 font-semibold text-[var(--foreground)]">
               {answeredCount} of {questions.length} answered
             </p>
           </div>
-          <div className="rounded-2xl border border-[var(--card-border)] bg-white/80 px-4 py-3">
-            <p className="uppercase tracking-[0.22em]">Mode</p>
-            <p className="mt-2 font-semibold text-[var(--foreground)]">
-              {demoMode ? "Demo (offline)" : "Live"}
+          <div className="group relative overflow-hidden rounded-2xl border border-[var(--card-border)] bg-white/80 px-4 py-3">
+            <span className="hover-glow wash-sky-mint" aria-hidden />
+            <p className="relative z-[1] uppercase tracking-[0.22em]">Mode</p>
+            <p className="relative z-[1] mt-2 font-semibold text-[var(--foreground)]">
+              {notFound ? "Demo (not found)" : demoMode ? "Demo (offline)" : "Live"}
             </p>
           </div>
         </div>
       </section>
 
       <div className="fade-up-delay rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-8 pb-10 shadow-[var(--shadow)] lg:p-10">
+        {notFound && (
+          <div className="mb-6 rounded-2xl bg-[#fff3d6] px-4 py-3 text-sm leading-6 text-[#92620a]">
+            The backend is reachable, but it has no interview with this ID (it may never have been
+            seeded, or was already submitted). Using fallback questions so you can still try the
+            voice interview.
+          </div>
+        )}
+
         {demoMode && (
           <div className="mb-6 rounded-2xl bg-[#fff3d6] px-4 py-3 text-sm leading-6 text-[#92620a]">
             Backend not reachable. Using fallback questions so you can still try the voice interview.
@@ -229,8 +259,9 @@ export default function InterviewPage() {
           ))}
         </div>
 
-        <article className="fade-up-delay rounded-[1.75rem] border border-[var(--card-border)] bg-white/85 p-6">
-          <div className="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <article className="group fade-up-delay relative overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white/85 p-6">
+          <span className="hover-glow wash-gold-coral" aria-hidden />
+          <div className="relative z-[1] mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.28em] text-[var(--accent-strong)]">
                 Question {currentIndex + 1} of {questions.length}
@@ -250,12 +281,18 @@ export default function InterviewPage() {
                   : "border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-white"
               }`}
             >
-              {isRecording && <span className="pulse-dot" aria-hidden />}
+              {isRecording && (
+                <span className="waveform" aria-hidden>
+                  {[0, 1, 2, 3, 4, 5, 6].map((bar) => (
+                    <span key={bar} className="waveform-bar" style={{ animationDelay: `${bar * 0.12}s` }} />
+                  ))}
+                </span>
+              )}
               {isRecording ? "Stop Recording" : "Start Recording"}
             </button>
           </div>
 
-          <div className="rounded-2xl bg-[#f9f6f0] p-5">
+          <div className="relative z-[1] rounded-2xl bg-[#f9f6f0] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
               {isRecording ? "Listening..." : "Transcript"}
             </p>
@@ -269,7 +306,7 @@ export default function InterviewPage() {
             />
           </div>
 
-          <div className="mt-5 flex justify-between">
+          <div className="relative z-[1] mt-5 flex justify-between">
             <button
               type="button"
               onClick={() => goToQuestion(currentIndex - 1)}
@@ -289,13 +326,14 @@ export default function InterviewPage() {
           </div>
         </article>
 
-        <div className="mt-8 flex flex-col gap-4 rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card)] p-6 shadow-[var(--shadow)] lg:flex-row lg:items-center lg:justify-between">
-          <div>
+        <div className="group relative mt-8 flex flex-col gap-4 overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card)] p-6 shadow-[var(--shadow)] lg:flex-row lg:items-center lg:justify-between">
+          <span className="hover-glow wash-accent-gold" aria-hidden />
+          <div className="relative z-[1]">
             <p className="text-xs uppercase tracking-[0.28em] text-[var(--accent-strong)]">Final action</p>
             <h3 className="mt-2 text-2xl font-semibold text-[var(--foreground)]">Submit interview answers</h3>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="relative z-[1] flex flex-wrap gap-3">
             <button
               type="button"
               onClick={handleSkip}
@@ -307,9 +345,9 @@ export default function InterviewPage() {
               type="button"
               onClick={handleSubmit}
               disabled={state === "submitting"}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-[var(--hero)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:translate-y-[-1px] disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex items-center justify-center gap-2 rounded-2xl bg-[var(--hero)] px-6 py-3 text-sm font-semibold text-white transition hover:translate-y-[-1px] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {state === "submitting" && <span className="spinner spinner-dark" aria-hidden />}
+              {state === "submitting" && <span className="spinner" aria-hidden />}
               {state === "submitting" ? "Submitting..." : "Submit Answers"}
             </button>
           </div>

@@ -38,6 +38,15 @@ export type InterviewQuestionsResponse = {
   questions: string[];
 };
 
+// The real backend nests PR metadata under `pr` (see backend/controllers/
+// interviewController.js), not flat prTitle/prUrl as originally assumed
+// when this frontend was built standalone. Normalizing here keeps every
+// consumer of fetchInterview() on the simple flat shape.
+type RawInterviewResponse = {
+  pr?: { title?: string; url?: string };
+  questions: string[];
+};
+
 export type InterviewSubmitPayload = {
   questions: string[];
   answers: string[];
@@ -60,8 +69,13 @@ export type ChatResponse = {
   citations: ChatCitation[];
 };
 
-export function fetchInterview(id: string) {
-  return request<InterviewQuestionsResponse>(`/interview/${id}`);
+export async function fetchInterview(id: string): Promise<InterviewQuestionsResponse> {
+  const data = await request<RawInterviewResponse>(`/interview/${id}`);
+  return {
+    prTitle: data.pr?.title ?? "Untitled pull request",
+    prUrl: data.pr?.url,
+    questions: data.questions
+  };
 }
 
 export function submitInterview(id: string, payload: InterviewSubmitPayload) {
