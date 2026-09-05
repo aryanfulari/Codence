@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CodenceMark } from "@/components/codence-mark";
+import { TextRoll } from "@/components/v1/skiper58";
 
 const navItems = [
   { href: "/", label: "Landing" },
@@ -40,7 +41,7 @@ export function SiteHeader() {
                         : "text-[var(--muted)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent-strong)]"
                     }`}
                   >
-                    {item.label}
+                    <TextRoll>{item.label}</TextRoll>
                   </Link>
                 </li>
               );

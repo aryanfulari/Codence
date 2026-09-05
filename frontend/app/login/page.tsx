@@ -21,9 +21,9 @@ export default function LoginPage() {
         <TiltWrapper className="rounded-2xl" rotateAmplitude={6} scaleOnHover={1.015}>
           <div className="overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[var(--shadow)]">
             <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#d9714f]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
               <span className="ml-2 font-mono text-xs text-[var(--muted)]">codence.app/login</span>
             </div>
 
