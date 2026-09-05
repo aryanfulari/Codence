@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { connectRepo } from "@/lib/api";
 import { TestimonialMarquee } from "@/components/testimonial-marquee";
 import { TiltWrapper } from "@/components/TiltedCard/TiltWrapper";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 const REPO_PATTERN = /^[\w.-]+\/[\w.-]+$/;
 
@@ -52,12 +53,12 @@ export default function LandingPage() {
   const isConnectedish = status === "connected" || status === "demo";
 
   return (
-    <div className="mx-auto w-full max-w-6xl overflow-x-hidden px-6 lg:px-10">
+    <div className="mx-auto w-full max-w-6xl overflow-x-hidden px-6 pb-12 lg:px-10">
       <section className="fade-up mx-auto max-w-4xl pt-8 pb-12 text-center lg:pt-10">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           Institutional memory, automated
         </p>
-        <h1 className="mt-6 text-6xl font-semibold leading-[1.02] text-[var(--foreground)] lg:text-8xl">
+        <h1 className="mt-6 text-4xl font-semibold leading-[1.05] text-[var(--foreground)] sm:text-5xl sm:leading-[1.02] md:text-6xl lg:text-8xl">
           The reasoning behind your code. Remembered, not lost.
         </h1>
         <p className="mx-auto mt-8 max-w-2xl text-xl leading-9 text-[var(--muted)] lg:text-2xl">
@@ -67,16 +68,17 @@ export default function LandingPage() {
       </section>
 
       <section className="fade-up-delay mx-auto max-w-3xl pb-16 lg:pb-24">
-        <TiltWrapper className="rounded-2xl" rotateAmplitude={6} scaleOnHover={1.015}>
-          <div className="overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[var(--shadow)]">
-            <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#d9714f]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
+        <TiltWrapper className="group rounded-2xl" rotateAmplitude={6} scaleOnHover={1.015}>
+          <div className="relative overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[var(--shadow)]">
+            <span className="hover-glow wash-sky-mint" aria-hidden />
+            <div className="relative z-[1] flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
               <span className="ml-2 font-mono text-xs text-[var(--muted)]">codence.app/connect</span>
             </div>
 
-            <div className="p-8 lg:p-10">
+            <div className="relative z-[1] p-8 lg:p-10">
               <div className="mb-8 flex items-center justify-between">
                 <div>
                   <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
@@ -195,9 +197,11 @@ export default function LandingPage() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          <TiltWrapper className="rounded-[1.75rem]" rotateAmplitude={8} scaleOnHover={1.02}>
-            <div className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
-              <div className="feature-mockup-mask h-44 shrink-0 bg-[#f5f4f2] p-4">
+          <ScrollReveal delayMs={0}>
+          <div className="group h-full rounded-[1.75rem]">
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
+              <span className="hover-glow wash-coral-sky" aria-hidden />
+              <div className="feature-mockup-mask relative z-[1] h-44 shrink-0 bg-[#f5f4f2] p-4">
                 <div className="rounded-xl border border-[var(--card-border)] bg-white p-3 shadow-[var(--shadow)]">
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent)]">
                     Question 1 of 3
@@ -205,8 +209,9 @@ export default function LandingPage() {
                   <p className="mt-1.5 text-sm font-semibold text-[var(--foreground)]">
                     What problem does this change solve?
                   </p>
-                  <div className="mt-2.5 flex items-center gap-2">
-                    <span className="waveform" aria-hidden>
+                  <div className="relative mt-2.5 flex items-center gap-2">
+                    <span className="wash-live" aria-hidden />
+                    <span className="relative z-[1] waveform" aria-hidden>
                       {[0, 1, 2, 3, 4, 5, 6].map((bar) => (
                         <span
                           key={bar}
@@ -215,14 +220,14 @@ export default function LandingPage() {
                         />
                       ))}
                     </span>
-                    <div className="inline-flex items-center gap-1.5 rounded-full border border-[#b3261e]/30 bg-[#fdeceb] px-2.5 py-1 text-[10px] font-semibold text-[#b3261e]">
+                    <div className="relative z-[1] inline-flex items-center gap-1.5 rounded-full border border-[#b3261e]/30 bg-[#fdeceb] px-2.5 py-1 text-[10px] font-semibold text-[#b3261e]">
                       <span className="pulse-dot" aria-hidden />
                       Recording
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-1 flex-col justify-center p-8 pt-2">
+              <div className="relative z-[1] flex flex-1 flex-col justify-center p-8 pt-2">
                 <h3 className="text-2xl font-semibold text-[var(--foreground)]">
                   Speak it, don&apos;t type it
                 </h3>
@@ -233,13 +238,16 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-          </TiltWrapper>
+          </div>
+          </ScrollReveal>
 
-          <TiltWrapper className="rounded-[1.75rem]" rotateAmplitude={8} scaleOnHover={1.02}>
-            <div className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
-              <div className="feature-mockup-mask h-44 shrink-0 space-y-2 bg-[#f5f4f2] p-4">
+          <ScrollReveal delayMs={120}>
+          <div className="group h-full rounded-[1.75rem]">
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
+              <span className="hover-glow wash-gold-coral" aria-hidden />
+              <div className="feature-mockup-mask relative z-[1] h-44 shrink-0 space-y-2 bg-[#f5f4f2] p-4">
                 <div className="flex items-center justify-between rounded-xl border border-[var(--card-border)] bg-white px-3 py-2.5 shadow-[var(--shadow)]">
-                  <p className="truncate text-xs font-medium text-[var(--foreground)]">
+                  <p className="min-w-0 truncate text-xs font-medium text-[var(--foreground)]">
                     Fix retry logic in payment_processor.py
                   </p>
                   <span className="ml-2 shrink-0 rounded-full bg-[var(--accent-soft)] px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--accent-strong)]">
@@ -247,7 +255,7 @@ export default function LandingPage() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between rounded-xl border border-[var(--card-border)] bg-white/70 px-3 py-2.5 opacity-60">
-                  <p className="truncate text-xs font-medium text-[var(--foreground)]">
+                  <p className="min-w-0 truncate text-xs font-medium text-[var(--foreground)]">
                     Update README typo
                   </p>
                   <span className="ml-2 shrink-0 rounded-full bg-black/5 px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--muted)]">
@@ -255,7 +263,7 @@ export default function LandingPage() {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-1 flex-col justify-center p-8 pt-2">
+              <div className="relative z-[1] flex flex-1 flex-col justify-center p-8 pt-2">
                 <h3 className="text-2xl font-semibold text-[var(--foreground)]">
                   Only the PRs that matter
                 </h3>
@@ -266,11 +274,14 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-          </TiltWrapper>
+          </div>
+          </ScrollReveal>
 
-          <TiltWrapper className="rounded-[1.75rem]" rotateAmplitude={8} scaleOnHover={1.02}>
-            <div className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
-              <div className="feature-mockup-mask h-44 shrink-0 space-y-2 bg-[#f5f4f2] p-4">
+          <ScrollReveal delayMs={240}>
+          <div className="group h-full rounded-[1.75rem]">
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white">
+              <span className="hover-glow wash-coral-gold" aria-hidden />
+              <div className="feature-mockup-mask relative z-[1] h-44 shrink-0 space-y-2 bg-[#f5f4f2] p-4">
                 <div className="flex justify-end">
                   <div className="rounded-xl bg-[var(--foreground)] px-3 py-2 text-xs text-white">
                     Why did we change retry handling?
@@ -284,7 +295,7 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-1 flex-col justify-center p-8 pt-2">
+              <div className="relative z-[1] flex flex-1 flex-col justify-center p-8 pt-2">
                 <h3 className="text-2xl font-semibold text-[var(--foreground)]">
                   Answers with receipts
                 </h3>
@@ -294,7 +305,8 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-          </TiltWrapper>
+          </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -308,16 +320,17 @@ export default function LandingPage() {
           </h2>
         </div>
 
-        <TiltWrapper className="mx-auto mt-12 max-w-3xl rounded-2xl" rotateAmplitude={10} scaleOnHover={1.03}>
-          <div className="overflow-hidden rounded-2xl border border-[var(--card-border)] shadow-[var(--shadow)]">
-            <div className="flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#e8a33d]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#d9714f]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
+        <TiltWrapper className="group mx-auto mt-12 max-w-3xl rounded-2xl" rotateAmplitude={10} scaleOnHover={1.03}>
+          <div className="relative overflow-hidden rounded-2xl border border-[var(--card-border)] shadow-[var(--shadow)]">
+            <span className="hover-glow wash-accent-gold" aria-hidden />
+            <div className="relative z-[1] flex items-center gap-2 border-b border-[var(--card-border)] bg-black/[0.02] px-5 py-3">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
               <span className="ml-2 font-mono text-xs text-[var(--muted)]">codence.app/chat</span>
             </div>
 
-            <div className="space-y-4 bg-white p-6 lg:p-8">
+            <div className="relative z-[1] space-y-4 bg-white/90 p-6 transition-colors duration-300 group-hover:bg-white/60 lg:p-8">
               <div className="flex justify-end">
                 <div className="max-w-sm rounded-2xl bg-[var(--foreground)] px-4 py-3 text-sm text-white">
                   Why did we change payment retry handling?
