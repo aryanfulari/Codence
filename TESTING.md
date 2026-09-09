@@ -304,7 +304,7 @@ curl -X POST http://localhost:5000/interview/:id/submit \
 
 | Error handling (Invalid payload) | **VERIFIED** | Returns HTTP 400 for malformed JSON. |
 
-| Real GitHub webhook delivery | **NOT VERIFIED** | Requires ngrok or public URL; ngrok not installed on this machine. Signature validation and full pipeline verified locally (see Section 17). |
+| Real GitHub webhook delivery | **LIVE VERIFIED** | Verified end-to-end with real pull_request payload via public Cloudflare tunnel. |
 
 ---
 
@@ -354,14 +354,27 @@ Missing X-Hub-Signature-256 header
 
 ✅ REJECTED
 
-Real GitHub Webhook Delivery — PARTIALLY VERIFIED
+Real GitHub Webhook Delivery — LIVE VERIFIED
 
-A real GitHub webhook delivery was successfully received through the public Cloudflare tunnel.
+A real GitHub webhook delivery was successfully received through the public Cloudflare tunnel for a real `pull_request` event (aryanfulari/Codence PR #4).
 
 Server log:
-
-[WEBHOOK] Event: ping
-[WEBHOOK] Ignored event: ping
+```
+[WEBHOOK] Event: pull_request
+[WEBHOOK] Action: opened
+[WEBHOOK] Repository: aryanfulari/Codence
+[WEBHOOK] PR #4: update backend testing documentation
+[WEBHOOK] Author: ruchirajags
+[GITHUB] Fetching PR files
+[GITHUB] Fetching PR files for aryanfulari/Codence#4
+[GITHUB] GET https://api.github.com/repos/aryanfulari/Codence/pulls/4/files
+[GITHUB] 1 file(s) changed
+[GITHUB] Fetching PR diff for aryanfulari/Codence#4
+[GITHUB] GET https://api.github.com/repos/aryanfulari/Codence/pulls/4
+[GITHUB] Diff fetched (14378 chars)
+[SCORER] Score: 0
+[SCORER] Important: false
+```
 
 This confirms:
 
@@ -371,19 +384,17 @@ This confirms:
 
 ✅ HMAC signature verification succeeded
 
-✅ X-GitHub-Event was read correctly
+✅ X-GitHub-Event was read correctly as `pull_request`
 
-✅ The ping event was safely ignored
+✅ PR payload was parsed to extract action, PR #, title, repository, and author
 
-✅ Backend returned HTTP 200
+✅ GitHub REST API was called using `GITHUB_TOKEN` to successfully fetch the 1 changed file and PR diff
 
-The ping event does not contain PR data, so it did not exercise PR parsing, GitHub API file/diff retrieval, scoring, or interview creation.
+✅ `scorePR()` was called with the correct data, returning score 0
+
+✅ Backend returned HTTP 200 and properly halted execution without creating an interview (since score < 50)
 
 What Remains to Be Tested
-
-Real pull_request delivery: A test PR must be opened (or an existing PR reopened) so GitHub sends an actual pull_request event.
-
-End-to-end PR webhook flow: The real PR event should be verified through signature validation → PR parsing → GitHub API → scorePR() → interview decision.
 
 Score ≥ 50 via live webhook: A real high-importance test PR should be used if interview creation through the webhook needs to be demonstrated.
 
@@ -391,4 +402,4 @@ Embedding integration: Requires live Gemini embedding endpoint verification.
 
 Person B ChromaDB storage: Currently mocked/stubbed; real ChromaDB is not running locally.
 
-Current conclusion: The GitHub webhook connection itself is LIVE VERIFIED for delivery and HMAC authentication via a real GitHub ping event, but the full real pull_request webhook pipeline is not yet fully live-verified.
+Current conclusion: The GitHub webhook connection itself is LIVE VERIFIED for delivery, HMAC authentication, payload parsing, GitHub API data fetching, and PR scoring via a real pull_request webhook pipeline!
