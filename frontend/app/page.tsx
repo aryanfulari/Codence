@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { connectRepo } from "@/lib/api";
 import { TestimonialMarquee } from "@/components/testimonial-marquee";
 import { StaggeredWordReveal } from "@/components/StaggeredWordReveal";
+import { DashboardMock } from "@/components/DashboardMock";
 import { FeatureShowcase } from "@/components/FeatureShowcase";
 import { ReasoningFlow } from "@/components/ReasoningFlow";
 
@@ -72,6 +73,20 @@ export default function LandingPage() {
             <path d="M8 11V8a4 4 0 0 1 8 0v3" />
           </svg>
           Local mode runs on Ollama. Nothing leaves your machine.
+        </div>
+      </section>
+
+      <section className="fade-up-delay hidden pb-16 sm:block lg:pb-24" aria-hidden>
+        <div className="relative lg:ml-6">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-10 -top-8 bottom-0 -z-10"
+            style={{
+              background:
+                "radial-gradient(60% 60% at 55% 30%, rgba(43,89,209,0.12), transparent 70%)"
+            }}
+          />
+          <DashboardMock />
         </div>
       </section>
 
