@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ApiError, fetchInterview, submitInterview } from "@/lib/api";
+import { StaggeredWordReveal } from "@/components/StaggeredWordReveal";
 
 const FALLBACK_QUESTIONS = [
   "What problem does this change solve?",
@@ -152,7 +153,7 @@ export default function InterviewPage() {
           </div>
           <div className="space-y-2">
             <h1 className="text-3xl font-semibold text-[var(--foreground)]">
-              {state === "success" ? "Interview submitted" : "Interview skipped"}
+              <StaggeredWordReveal text={state === "success" ? "Interview submitted" : "Interview skipped"} />
             </h1>
             <p className="max-w-xl text-base leading-7 text-[var(--muted)]">
               {state === "success"
@@ -180,7 +181,7 @@ export default function InterviewPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
+    <div className="mx-auto w-full max-w-6xl px-6 pb-16 lg:px-10 lg:pb-20">
       <section className="fade-up mx-auto max-w-3xl pt-8 pb-10 text-center lg:pt-10">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           PR Interview
