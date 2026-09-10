@@ -124,6 +124,18 @@ textarea {
   opacity: 0.25;
 }
 
+/* Same sizing/blur as hover-glow, but always visible — for panels where
+   the color wash should be a consistent part of the surface, not tied
+   to a hover interaction. */
+.wash-static {
+  position: absolute;
+  inset: -15%;
+  filter: blur(50px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Tight glow that hugs the waveform + recording indicator, pulsing in
    sync with the recording animation instead of sitting still. */
 .wash-live {
