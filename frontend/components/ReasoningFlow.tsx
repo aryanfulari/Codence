@@ -219,9 +219,9 @@ export function ReasoningFlow() {
         ))}
       </ol>
 
-      {/* 02, 03, 04 — the rest of the story, one split block each */}
+      {/* 01, 02, 03 — the rest of the story, one split block each */}
       <SplitBlock
-        n="02"
+        n="01"
         title="Every answer traces back to a real decision, not a guess."
         mockup={<DecisionsBoard />}
       >
@@ -243,7 +243,7 @@ export function ReasoningFlow() {
       </SplitBlock>
 
       <SplitBlock
-        n="03"
+        n="02"
         title="Ask in plain words. Read back the answer with its citation."
         mockup={<ChatMock />}
       >
@@ -255,7 +255,7 @@ export function ReasoningFlow() {
       </SplitBlock>
 
       <SplitBlock
-        n="04"
+        n="03"
         title="Runs on your machine, or on your key. Your call."
         mockup={<ModelToggleMock />}
       >
