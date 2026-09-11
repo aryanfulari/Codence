@@ -97,7 +97,7 @@ export default function ChatPage() {
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto">
           {messages.length === 0 ? (
             <div className="fade-up-delay flex flex-1 items-center justify-center">
-              <div className="group relative overflow-hidden w-full max-w-3xl rounded-[1.75rem] border border-dashed border-[var(--card-border)] bg-white/80 p-8 text-center">
+              <div className="group relative overflow-hidden w-full max-w-3xl rounded-[1.75rem] border border-dashed border-[var(--card-border)] bg-[var(--surface)]/80 p-8 text-center">
                 <span className="hover-glow wash-sky-mint" aria-hidden />
                 <p className="relative z-[1] text-sm uppercase tracking-[0.28em] text-[var(--muted)]">Empty state</p>
                 <h2 className="relative z-[1] mt-3 text-3xl font-semibold text-[var(--foreground)]">
@@ -114,7 +114,7 @@ export default function ChatPage() {
                       key={question}
                       type="button"
                       onClick={() => void sendQuery(question)}
-                      className="rounded-2xl bg-[#f9f6f0] px-4 py-3 text-left text-sm text-[var(--foreground)] transition hover:bg-[var(--accent-soft)]"
+                      className="rounded-2xl bg-[var(--surface-2)] px-4 py-3 text-left text-sm text-[var(--foreground)] transition hover:bg-[var(--accent-soft)]"
                     >
                       {question}
                     </button>
@@ -135,8 +135,8 @@ export default function ChatPage() {
                   <div
                     className={`max-w-2xl rounded-[1.5rem] px-5 py-4 text-base leading-7 ${
                       message.role === "user"
-                        ? "bg-[var(--foreground)] text-white"
-                        : "border border-[var(--card-border)] bg-white/90 text-[var(--foreground)]"
+                        ? "bg-[var(--ink)] text-[var(--ink-foreground)]"
+                        : "border border-[var(--card-border)] bg-[var(--surface)]/90 text-[var(--foreground)]"
                     }`}
                   >
                     <p>{message.content}</p>
@@ -148,7 +148,7 @@ export default function ChatPage() {
                             href={citation.prUrl ?? "#"}
                             target={citation.prUrl ? "_blank" : undefined}
                             rel={citation.prUrl ? "noreferrer" : undefined}
-                            className="rounded-xl bg-[#f9f6f0] px-3 py-2 font-mono text-xs text-[var(--accent-strong)] transition hover:bg-[var(--accent-soft)]"
+                            className="rounded-xl bg-[var(--surface-2)] px-3 py-2 font-mono text-xs text-[var(--accent-strong)] transition hover:bg-[var(--accent-soft)]"
                           >
                             {citation.prTitle} · {citation.author} · {citation.date}
                           </a>
@@ -160,7 +160,7 @@ export default function ChatPage() {
               ))}
               {isSending && (
                 <div className="flex justify-start">
-                  <div className="flex items-center gap-2 rounded-[1.5rem] border border-[var(--card-border)] bg-white/90 px-5 py-4">
+                  <div className="flex items-center gap-2 rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--surface)]/90 px-5 py-4">
                     <span className="typing-dot" />
                     <span className="typing-dot" style={{ animationDelay: "0.15s" }} />
                     <span className="typing-dot" style={{ animationDelay: "0.3s" }} />

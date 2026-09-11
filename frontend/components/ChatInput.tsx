@@ -73,7 +73,7 @@ export function ChatInput({ value, onChange, onSend, disabled, placeholder }: Ch
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-white/90 p-2 pl-5 transition focus-within:border-[var(--accent)] focus-within:ring-4 focus-within:ring-[var(--accent-soft)]"
+      className="flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-[var(--surface)]/90 p-2 pl-5 transition focus-within:border-[var(--accent)] focus-within:ring-4 focus-within:ring-[var(--accent-soft)]"
     >
       <input
         type="text"
@@ -86,7 +86,7 @@ export function ChatInput({ value, onChange, onSend, disabled, placeholder }: Ch
         type="submit"
         disabled={!canSend}
         aria-label="Send message"
-        className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--foreground)] text-white transition disabled:cursor-not-allowed disabled:opacity-40"
+        className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--ink)] text-[var(--ink-foreground)] transition disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AnimatePresence>
           {justSent && (
