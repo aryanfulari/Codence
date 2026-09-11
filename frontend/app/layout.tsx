@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono, IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -51,9 +52,10 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${ibmPlexMono.variable} ${sourceSerif4.variable}`}
     >
       <body>
-        <div className="page-shell min-h-screen">
+        <div className="page-shell flex min-h-screen flex-col">
           <SiteHeader />
-          <main className="relative z-10">{children}</main>
+          <main className="relative z-10 flex-1">{children}</main>
+          <SiteFooter />
         </div>
       </body>
     </html>

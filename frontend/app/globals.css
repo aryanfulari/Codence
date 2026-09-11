@@ -124,6 +124,18 @@ textarea {
   opacity: 0.25;
 }
 
+/* Same sizing/blur as hover-glow, but always visible — for panels where
+   the color wash should be a consistent part of the surface, not tied
+   to a hover interaction. */
+.wash-static {
+  position: absolute;
+  inset: -15%;
+  filter: blur(50px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Tight glow that hugs the waveform + recording indicator, pulsing in
    sync with the recording animation instead of sitting still. */
 .wash-live {
@@ -200,6 +212,65 @@ body {
 .feature-mockup-mask {
   mask-image: linear-gradient(to bottom, black 55%, transparent 96%);
   -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 96%);
+}
+
+/* One headline word that briefly tears into a chromatic split every few
+   seconds (see components/GlitchText.tsx). Two offset copies of the text
+   flash in for a beat, then it settles back to clean italic. */
+.glitch-word {
+  position: relative;
+  display: inline-block;
+  font-style: italic;
+}
+
+.glitch-word::before,
+.glitch-word::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.glitch-word::before {
+  color: color-mix(in srgb, var(--accent) 85%, transparent);
+  animation: glitchTop 6s infinite;
+}
+
+.glitch-word::after {
+  color: #c8503b;
+  animation: glitchBottom 6s infinite;
+}
+
+@keyframes glitchTop {
+  0%, 86%, 100% {
+    opacity: 0;
+    transform: translate(0);
+    clip-path: inset(0 0 58% 0);
+  }
+  87% { opacity: 0.85; transform: translate(-2px, -1px); }
+  90% { transform: translate(3px, 1px); }
+  93% { transform: translate(-1px, 0); }
+  95% { opacity: 0; }
+}
+
+@keyframes glitchBottom {
+  0%, 86%, 100% {
+    opacity: 0;
+    transform: translate(0);
+    clip-path: inset(58% 0 0 0);
+  }
+  88% { opacity: 0.85; transform: translate(2px, 1px); }
+  91% { transform: translate(-3px, -1px); }
+  94% { transform: translate(1px, 0); }
+  96% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-word::before,
+  .glitch-word::after {
+    display: none;
+  }
 }
 
 /* Scroll-triggered reveal (see components/ScrollReveal.tsx) — starts

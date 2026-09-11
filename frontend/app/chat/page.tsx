@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { askChat, ChatCitation } from "@/lib/api";
 import { searchSeededDecisions } from "@/lib/seeded-decisions";
 import { ChatInput } from "@/components/ChatInput";
+import { StaggeredWordReveal } from "@/components/StaggeredWordReveal";
 
 type ChatMessage = {
   id: string;
@@ -80,11 +81,11 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
+    <div className="mx-auto w-full max-w-6xl px-6 pb-16 lg:px-10 lg:pb-20">
       <section className="fade-up mx-auto max-w-3xl pt-8 pb-10 text-center lg:pt-10">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">RAG Chat</p>
         <h1 className="mt-6 text-3xl font-semibold leading-[1.1] text-[var(--foreground)] sm:text-4xl sm:leading-[1.05] md:text-5xl lg:text-7xl">
-          Ask why.
+          <StaggeredWordReveal text="Ask why." />
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)] lg:text-xl">
           Every answer is grounded in stored decisions and cited by PR, author, and date.
