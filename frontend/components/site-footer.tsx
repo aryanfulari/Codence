@@ -22,7 +22,7 @@ export function SiteFooter() {
                 alt="Codence"
                 width={432}
                 height={144}
-                className="h-7 w-auto mix-blend-multiply"
+                className="h-7 w-auto mix-blend-multiply dark:mix-blend-screen dark:invert"
               />
             </Link>
             <p className="text-sm leading-6 text-[var(--muted)]">

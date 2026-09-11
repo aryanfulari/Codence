@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TextRoll } from "@/components/v1/skiper58";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 // Marketing anchor-nav: the middle links jump to sections on the landing page
 // (they carry a leading slash so they also work from /interview and /chat),
@@ -36,12 +37,12 @@ export function SiteHeader() {
             width={432}
             height={144}
             priority
-            className="h-6 w-auto mix-blend-multiply sm:h-7"
+            className="h-6 w-auto mix-blend-multiply dark:mix-blend-screen dark:invert sm:h-7"
           />
         </Link>
 
         <nav className="order-3 col-span-2 justify-self-center sm:order-none sm:col-auto">
-          <ul className="flex items-center gap-1 rounded-full border border-[var(--card-border)] bg-white/80 p-1.5 text-sm shadow-[0_2px_10px_rgba(22,21,15,0.05)]">
+          <ul className="flex items-center gap-1 rounded-full border border-[var(--card-border)] bg-[var(--surface)]/80 p-1.5 text-sm shadow-[0_2px_10px_rgba(22,21,15,0.05)]">
             {navItems.map((item) => {
               const active = isActive(pathname, item.href);
 
@@ -64,10 +65,11 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center justify-end justify-self-end">
+        <div className="flex items-center justify-end justify-self-end gap-2">
+          <ThemeToggle />
           <Link
             href="/#connect"
-            className="whitespace-nowrap rounded-full bg-[var(--foreground)] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[var(--accent-strong)] sm:text-sm"
+            className="whitespace-nowrap rounded-full bg-[var(--ink)] px-4 py-2 text-xs font-semibold text-[var(--ink-foreground)] transition hover:bg-[var(--accent-strong)] hover:text-white sm:text-sm"
           >
             Connect a repository
           </Link>

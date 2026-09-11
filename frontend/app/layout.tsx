@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter, JetBrains_Mono, IBM_Plex_Mono, Source_Serif_4 } f
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ThemeScript } from "@/components/ThemeScript";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -49,9 +50,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${ibmPlexMono.variable} ${sourceSerif4.variable}`}
     >
       <body>
+        <ThemeScript />
         <div className="page-shell flex min-h-screen flex-col">
           <SiteHeader />
           <main className="relative z-10 flex-1">{children}</main>
