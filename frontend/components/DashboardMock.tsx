@@ -7,11 +7,11 @@ export function DashboardMock() {
     <div className="relative w-full overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[0_18px_40px_-22px_rgba(38,33,25,0.4)]">
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-16 -top-24 -z-10 h-72 w-72 rounded-full bg-[#3f6fe0] opacity-[0.22] blur-[70px]"
+        className="pointer-events-none absolute -left-16 -top-24 -z-10 h-72 w-72 rounded-full bg-[#3f6fe0] opacity-[0.22] blur-[70px] dark:opacity-[0.4]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-28 -right-10 -z-10 h-80 w-80 rounded-full bg-[#e0a24a] opacity-[0.24] blur-[80px]"
+        className="pointer-events-none absolute -bottom-28 -right-10 -z-10 h-80 w-80 rounded-full bg-[#e0a24a] opacity-[0.24] blur-[80px] dark:opacity-[0.4]"
       />
 
       <div className="flex items-center justify-between border-b border-[var(--card-border)] px-4 py-2.5">
@@ -72,7 +72,7 @@ export function DashboardMock() {
 
         {/* activity */}
         <div className="min-w-0 flex-1 p-5">
-          <div className="flex w-fit gap-1 rounded-lg bg-black/[0.03] p-1 font-mono text-[11px]">
+          <div className="flex w-fit gap-1 rounded-lg bg-black/[0.03] p-1 font-mono text-[11px] dark:bg-white/[0.05]">
             <span className="rounded-md bg-[var(--card)] px-2.5 py-1 text-[var(--foreground)] shadow-[0_1px_2px_rgba(22,21,15,0.06)]">
               Activity
             </span>
@@ -93,7 +93,7 @@ export function DashboardMock() {
               </blockquote>
             </Event>
             <Event label="Decision stored" time="2 min ago" last>
-              <div className="mt-1 overflow-hidden rounded-lg border border-[var(--card-border)] bg-white font-mono text-[11px] leading-5">
+              <div className="mt-1 overflow-hidden rounded-lg border border-[var(--card-border)] bg-[var(--surface)] font-mono text-[11px] leading-5">
                 <div className="border-b border-[var(--card-border)] px-3 py-1.5 text-[10px] text-[var(--muted)]">
                   payment_processor.py
                 </div>
@@ -165,9 +165,9 @@ function Event({
 function DiffLine({ n, text, kind }: { n: string; text: string; kind?: "add" | "del" }) {
   const tone =
     kind === "add"
-      ? "bg-[#e7f3ea] text-[#1f7a54]"
+      ? "bg-[var(--success-soft)] text-[var(--success)]"
       : kind === "del"
-        ? "bg-[#fdeceb] text-[#b3261e]"
+        ? "bg-[var(--danger-soft)] text-[var(--danger)]"
         : "text-[var(--muted)]";
   const sign = kind === "add" ? "+" : kind === "del" ? "-" : " ";
   return (

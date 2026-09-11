@@ -2,7 +2,7 @@ import { testimonials, type Testimonial } from "@/lib/testimonials";
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div className="w-80 shrink-0 rounded-2xl border border-[var(--card-border)] bg-white p-6">
+    <div className="w-80 shrink-0 rounded-2xl border border-[var(--card-border)] bg-[var(--surface)] p-6">
       <p className="text-base leading-7 text-[var(--foreground)]">
         &ldquo;{testimonial.quote}&rdquo;
       </p>

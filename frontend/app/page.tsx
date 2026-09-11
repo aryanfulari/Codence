@@ -61,11 +61,11 @@ export default function LandingPage() {
       <section className="fade-up relative pt-8 pb-8 lg:pt-12 lg:pb-10">
         <div
           aria-hidden
-          className="pointer-events-none absolute -left-16 -top-16 -z-10 h-64 w-64 rounded-full bg-[#3f6fe0] opacity-[0.16] blur-[65px]"
+          className="pointer-events-none absolute -left-16 -top-16 -z-10 h-64 w-64 rounded-full bg-[#3f6fe0] opacity-[0.16] blur-[65px] dark:opacity-[0.32]"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute right-10 top-10 -z-10 hidden h-56 w-56 rounded-full bg-[#e0a24a] opacity-[0.16] blur-[65px] lg:block"
+          className="pointer-events-none absolute right-10 top-10 -z-10 hidden h-56 w-56 rounded-full bg-[#e0a24a] opacity-[0.16] blur-[65px] dark:opacity-[0.32] lg:block"
         />
         <p className="relative text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           Institutional memory, automated
@@ -84,7 +84,7 @@ export default function LandingPage() {
             <div className="mt-5">
               <Link
                 href="/#connect"
-                className="inline-block rounded-full bg-[var(--foreground)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--accent-strong)]"
+                className="inline-block rounded-full bg-[var(--ink)] px-5 py-2.5 text-sm font-semibold text-[var(--ink-foreground)] transition hover:bg-[var(--accent-strong)] hover:text-white"
               >
                 Connect a repository
               </Link>
@@ -134,20 +134,20 @@ export default function LandingPage() {
       </section>
 
       <section id="connect" className="fade-up-delay-2 scroll-mt-24 pb-20 lg:pb-28">
-        <div className="relative mx-auto max-w-2xl overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[#e3eafc] px-6 py-10 lg:px-10 lg:py-12">
+        <div className="relative mx-auto max-w-2xl overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[#e3eafc] px-6 py-10 dark:bg-[var(--surface-2)] lg:px-10 lg:py-12">
           <div
             aria-hidden
-            className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-[#3f6fe0] opacity-[0.16] blur-[70px]"
+            className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-[#3f6fe0] opacity-[0.16] blur-[70px] dark:opacity-[0.4]"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-20 -right-14 h-72 w-72 rounded-full bg-[#e0a24a] opacity-[0.28] blur-[80px]"
+            className="pointer-events-none absolute -bottom-20 -right-14 h-72 w-72 rounded-full bg-[#e0a24a] opacity-[0.28] blur-[80px] dark:opacity-[0.4]"
           />
 
           <div className="relative">
             <div className="mb-6 flex items-center gap-3">
               <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">Repo Connect</p>
-              <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
+              <span className="rounded-full bg-[var(--surface)]/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-strong)]">
                 {status === "connected" ? "Live" : status === "demo" ? "Demo" : "Setup"}
               </span>
             </div>
@@ -167,7 +167,7 @@ export default function LandingPage() {
                   className={`rounded-2xl p-4 text-sm leading-6 ${
                     status === "connected"
                       ? "bg-[var(--accent-soft)] text-[var(--accent-strong)]"
-                      : "bg-[#fff3d6] text-[#92620a]"
+                      : "bg-[var(--warning-soft)] text-[var(--warning)]"
                   }`}
                 >
                   {status === "connected"
@@ -175,7 +175,7 @@ export default function LandingPage() {
                     : `Backend not reachable yet, so ${repo.trim()} was saved locally. You can still explore the interview and chat demo.`}
                 </div>
 
-                <div className="rounded-2xl bg-white/80 p-4">
+                <div className="rounded-2xl bg-[var(--surface)]/80 p-4">
                   <p className="text-xs uppercase tracking-[0.22em] text-[var(--muted)]">Repository</p>
                   <p className="mt-1 font-semibold text-[var(--foreground)]">{repo.trim()}</p>
                 </div>
@@ -183,7 +183,7 @@ export default function LandingPage() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-full rounded-full border border-[var(--card-border)] bg-white px-5 py-3 text-base font-semibold text-[var(--foreground)] transition hover:bg-white/70"
+                  className="w-full rounded-full border border-[var(--card-border)] bg-[var(--surface)] px-5 py-3 text-base font-semibold text-[var(--foreground)] transition hover:bg-[var(--surface)]/70"
                 >
                   Connect a different repository
                 </button>
@@ -202,7 +202,7 @@ export default function LandingPage() {
                       value={token}
                       onChange={(event) => setToken(event.target.value)}
                       placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
-                      className="w-full rounded-full border border-[var(--card-border)] bg-white px-4 py-3 pr-16 text-sm outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
+                      className="w-full rounded-full border border-[var(--card-border)] bg-[var(--surface)] px-4 py-3 pr-16 text-sm outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
                     />
                     <button
                       type="button"
@@ -225,18 +225,18 @@ export default function LandingPage() {
                     value={repo}
                     onChange={(event) => setRepo(event.target.value)}
                     placeholder="owner/reponame"
-                    className="w-full rounded-full border border-[var(--card-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
+                    className="w-full rounded-full border border-[var(--card-border)] bg-[var(--surface)] px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
                   />
                 </div>
 
                 {error && (
-                  <p className="rounded-2xl bg-[#fdeceb] px-4 py-3 text-sm leading-6 text-[#b3261e]">{error}</p>
+                  <p className="rounded-2xl bg-[var(--danger-soft)] px-4 py-3 text-sm leading-6 text-[var(--danger)]">{error}</p>
                 )}
 
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--foreground)] px-5 py-3.5 text-base font-semibold text-white transition hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--ink)] px-5 py-3.5 text-base font-semibold text-[var(--ink-foreground)] transition hover:bg-[var(--accent-strong)] hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "submitting" && <span className="spinner" aria-hidden />}
                   {status === "submitting" ? "Connecting..." : "Connect Repository"}

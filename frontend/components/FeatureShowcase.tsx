@@ -8,7 +8,7 @@ const CYCLE_MS = 4000;
 function ScoreMockup() {
   return (
     <div className="space-y-2.5">
-      <div className="rounded-xl border border-[var(--accent)] bg-white p-3 shadow-[var(--shadow)]">
+      <div className="rounded-xl border border-[var(--accent)] bg-[var(--surface)] p-3 shadow-[var(--shadow)]">
         <div className="flex items-center justify-between gap-2">
           <p className="min-w-0 truncate font-mono text-[11px] text-[var(--muted)]">
             payment_processor.py
@@ -24,7 +24,7 @@ function ScoreMockup() {
           </span>
           <span className="font-mono text-xs font-semibold text-[var(--accent-strong)]">82</span>
         </div>
-        <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-black/[0.06]">
+        <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/[0.1]">
           <div className="h-full rounded-full bg-[var(--accent)]" style={{ width: "82%" }} />
         </div>
         <div className="mt-2.5 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-soft)] px-2 py-0.5 text-[10px] font-semibold text-[var(--accent-strong)]">
@@ -32,7 +32,7 @@ function ScoreMockup() {
           Interview triggered
         </div>
       </div>
-      <div className="rounded-xl border border-[var(--card-border)] bg-white/60 p-3 opacity-70">
+      <div className="rounded-xl border border-[var(--card-border)] bg-[var(--surface)]/60 p-3 opacity-70">
         <div className="flex items-center justify-between gap-2">
           <p className="min-w-0 truncate text-xs font-semibold text-[var(--foreground)]">
             Update README typo
@@ -50,13 +50,13 @@ function ScoreMockup() {
 
 function CaptureMockup() {
   return (
-    <div className="rounded-xl border border-[var(--card-border)] bg-white p-4 shadow-[var(--shadow)]">
+    <div className="rounded-xl border border-[var(--card-border)] bg-[var(--surface)] p-4 shadow-[var(--shadow)]">
       <div className="flex items-center justify-between gap-2">
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--accent)]">
           Question 2 of 3
         </p>
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-[#b3261e]/30 bg-[#fdeceb] px-2 py-0.5 text-[10px] font-semibold text-[#b3261e]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#b3261e]" aria-hidden />
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-[var(--danger)]/30 bg-[var(--danger-soft)] px-2 py-0.5 text-[10px] font-semibold text-[var(--danger)]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--danger)]" aria-hidden />
           Recording
         </div>
       </div>
@@ -87,20 +87,20 @@ function AnswerMockup() {
   return (
     <div className="space-y-2">
       <div className="flex justify-end">
-        <div className="rounded-xl bg-[var(--foreground)] px-3 py-2 text-xs text-white">
+        <div className="rounded-xl bg-[var(--ink)] px-3 py-2 text-xs text-[var(--ink-foreground)]">
           Why did we change retry handling?
         </div>
       </div>
-      <div className="rounded-xl border border-[var(--card-border)] bg-white px-3 py-2.5 text-xs leading-5 text-[var(--foreground)] shadow-[var(--shadow)]">
+      <div className="rounded-xl border border-[var(--card-border)] bg-[var(--surface)] px-3 py-2.5 text-xs leading-5 text-[var(--foreground)] shadow-[var(--shadow)]">
         Removed automatic retries after duplicate charges under high load.
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
-          <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#f9f6f0] px-2 py-1 font-mono text-[10px] text-[var(--accent-strong)]">
+          <span className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--surface-2)] px-2 py-1 font-mono text-[10px] text-[var(--accent-strong)]">
             <span className="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[var(--accent)] text-[8px] font-semibold text-white">
               A
             </span>
             PR #47 &middot; Aryan &middot; Aug 14, 2026
           </span>
-          <span className="rounded-lg bg-black/[0.06] px-2 py-1 font-mono text-[10px] text-[var(--muted)]">
+          <span className="rounded-lg bg-black/[0.06] px-2 py-1 font-mono text-[10px] text-[var(--muted)] dark:bg-white/[0.08]">
             2 linked decisions
           </span>
         </div>
@@ -206,7 +206,7 @@ export function FeatureShowcase() {
                   className={`mr-0.5 inline-block rounded px-1 py-0 align-baseline font-semibold leading-[1] [box-decoration-break:clone] [-webkit-box-decoration-break:clone] transition-colors duration-500 ${
                     isActive
                       ? "bg-[var(--accent-soft)] text-[var(--accent-strong)]"
-                      : "bg-black/[0.05] text-[var(--foreground)]"
+                      : "bg-black/[0.05] text-[var(--foreground)] dark:bg-white/[0.08]"
                   }`}
                 >
                   {feature.keyword}
@@ -233,7 +233,7 @@ export function FeatureShowcase() {
                 }`}
               >
                 <div
-                  className={`rounded-2xl border bg-[#f5f4f2] p-3.5 transition-all duration-500 ${
+                  className={`rounded-2xl border bg-[#f5f4f2] p-3.5 transition-all duration-500 dark:bg-[var(--surface-2)] ${
                     isActive
                       ? "-translate-y-1 border-[var(--accent)] shadow-[0_2.8px_2.2px_rgba(0,0,0,0.034),0_6.7px_5.3px_rgba(0,0,0,0.048),0_12.5px_10px_rgba(0,0,0,0.06),0_22.3px_17.9px_rgba(0,0,0,0.072),0_41.8px_33.4px_rgba(0,0,0,0.086),0_100px_80px_rgba(0,0,0,0.12)]"
                       : "border-[var(--card-border)]"
