@@ -290,7 +290,7 @@ function SplitBlock({
           </h3>
           <div className="mt-4 max-w-md">{children}</div>
         </div>
-        <div className="relative lg:-mr-10 xl:-mr-28">
+        <div className="relative">
           <div
             aria-hidden
             className="pointer-events-none absolute -inset-6 -z-10"

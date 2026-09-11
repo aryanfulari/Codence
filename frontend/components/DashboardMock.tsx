@@ -4,7 +4,16 @@
 
 export function DashboardMock() {
   return (
-    <div className="w-[76rem] max-w-none overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[0_40px_90px_-30px_rgba(38,33,25,0.35)]">
+    <div className="relative w-full overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[0_18px_40px_-22px_rgba(38,33,25,0.4)]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-16 -top-24 -z-10 h-72 w-72 rounded-full bg-[#3f6fe0] opacity-[0.22] blur-[70px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-28 -right-10 -z-10 h-80 w-80 rounded-full bg-[#e0a24a] opacity-[0.24] blur-[80px]"
+      />
+
       <div className="flex items-center justify-between border-b border-[var(--card-border)] px-4 py-2.5">
         <div className="flex items-center gap-2 font-mono text-[11px] text-[var(--muted)]">
           <IconInbox />
