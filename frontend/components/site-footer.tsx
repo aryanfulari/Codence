@@ -16,7 +16,16 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex max-w-xs flex-col gap-3">
-            <Link href="/" className="inline-block">
+            <Link href="/" className="inline-flex items-center gap-2">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
+                <Image
+                  src="/codence-logo.png"
+                  alt=""
+                  width={64}
+                  height={64}
+                  className="h-full w-full scale-125 object-cover"
+                />
+              </span>
               <Image
                 src="/codence-wordmark.png"
                 alt="Codence"

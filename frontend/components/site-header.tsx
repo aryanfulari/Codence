@@ -30,7 +30,22 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--card-border)] bg-[var(--background)]">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-2 items-center gap-4 px-6 py-4 sm:grid-cols-[1fr_auto_1fr] lg:px-10">
-        <Link href="/" className="justify-self-start">
+        <Link href="/" className="flex items-center gap-2 justify-self-start">
+          {/* Always a plain white coin, in both themes: the artwork itself
+              sits on a white square, so a theme-aware background would
+              show as a mismatched box around it on dark. A small fixed
+              light chip is the clean way to frame full-color art next to
+              a wordmark that otherwise recolors with the theme. */}
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white sm:h-8 sm:w-8">
+            <Image
+              src="/codence-logo.png"
+              alt=""
+              width={64}
+              height={64}
+              priority
+              className="h-full w-full scale-125 object-cover"
+            />
+          </span>
           <Image
             src="/codence-wordmark.png"
             alt="Codence"
