@@ -86,7 +86,7 @@ export function ReasoningFlow() {
   }, [reduceMotion]);
 
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto w-full">
       <ScrollReveal>
         <div className="max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent-strong)]">

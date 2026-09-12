@@ -134,7 +134,7 @@ export default function LandingPage() {
       </section>
 
       <section id="connect" className="fade-up-delay-2 scroll-mt-24 pb-20 lg:pb-28">
-        <div className="relative mx-auto max-w-2xl overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[#e3eafc] px-6 py-10 dark:bg-[var(--surface-2)] lg:px-10 lg:py-12">
+        <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[#e3eafc] px-6 py-10 dark:bg-[var(--surface-2)] lg:px-10 lg:py-12">
           <div
             aria-hidden
             className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-[#3f6fe0] opacity-[0.16] blur-[70px] dark:opacity-[0.4]"
