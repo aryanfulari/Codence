@@ -309,14 +309,19 @@ function SplitBlock({
 
 function MockShell({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[0_24px_60px_rgba(38,33,25,0.12)]">
+    <div className="flex min-h-[24rem] flex-col overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[0_24px_60px_rgba(38,33,25,0.12)]">
       <div className="flex items-center gap-2 border-b border-[var(--card-border)] px-4 py-3">
         <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
         <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--foreground)]">
           {title}
         </span>
       </div>
-      {children}
+      {/* Some mockups (the model toggle, in particular) have far less
+          natural content than others, so without this the card would just
+          be short instead of matching the visual weight of its siblings.
+          Centering within the shared min-height keeps light content from
+          reading as an under-filled box. */}
+      <div className="flex flex-1 flex-col justify-center">{children}</div>
     </div>
   );
 }
