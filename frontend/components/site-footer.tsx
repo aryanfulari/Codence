@@ -13,7 +13,7 @@ export function SiteFooter() {
 
   return (
     <footer className="relative z-10 border-t border-[var(--card-border)] bg-[var(--background)]">
-      <div className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
+      <div className="mx-auto w-full max-w-[87.5rem] px-6 py-12 lg:px-10">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex max-w-xs flex-col gap-3">
             <Link href="/" className="inline-flex items-center gap-2">

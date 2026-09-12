@@ -57,7 +57,7 @@ export default function LandingPage() {
 
   return (
     <>
-    <div className="mx-auto w-full max-w-6xl overflow-x-hidden px-6 lg:px-10">
+    <div className="mx-auto w-full max-w-[87.5rem] overflow-x-hidden px-6 lg:px-10">
       <section className="fade-up relative pt-8 pb-8 lg:pt-12 lg:pb-10">
         <div
           aria-hidden
@@ -102,14 +102,14 @@ export default function LandingPage() {
         apart across browsers. Only the right edge is pushed out, by exactly
         undoing this container's own centering/padding. */}
     <section className="fade-up-delay hidden pb-16 sm:block lg:pb-24" aria-hidden>
-      <div className="mx-auto w-full max-w-6xl px-6 lg:px-10">
-        <div className="mr-[calc(-1*max(0px,(100vw-72rem)/2)-1.5rem)] lg:mr-[calc(-1*max(0px,(100vw-72rem)/2)-2.5rem)]">
+      <div className="mx-auto w-full max-w-[87.5rem] px-6 lg:px-10">
+        <div className="mr-[calc(-1*max(0px,(100vw-87.5rem)/2)-1.5rem)] lg:mr-[calc(-1*max(0px,(100vw-87.5rem)/2)-2.5rem)]">
           <DashboardMock />
         </div>
       </div>
     </section>
 
-    <div className="mx-auto w-full max-w-6xl overflow-x-hidden px-6 pb-12 lg:px-10">
+    <div className="mx-auto w-full max-w-[87.5rem] overflow-x-hidden px-6 pb-12 lg:px-10">
       <section id="how-it-works" className="scroll-mt-24 pb-20 lg:pb-28">
         <FeatureShowcase />
       </section>

@@ -37,7 +37,7 @@ export default function DemoDashboard() {
   const columns: DecisionStatus[] = ["captured", "queued", "skipped"];
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 py-8 lg:px-10 lg:py-10">
+    <div className="mx-auto w-full max-w-[87.5rem] px-6 py-8 lg:px-10 lg:py-10">
       {/* instance bar */}
       <div className="flex flex-col gap-4 rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">

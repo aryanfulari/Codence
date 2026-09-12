@@ -29,7 +29,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--card-border)] bg-[var(--background)]">
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 items-center gap-4 px-6 py-4 sm:grid-cols-[1fr_auto_1fr] lg:px-10">
+      <div className="mx-auto grid w-full max-w-[87.5rem] grid-cols-2 items-center gap-4 px-6 py-4 sm:grid-cols-[1fr_auto_1fr] lg:px-10">
         <Link href="/" className="flex items-center gap-2 justify-self-start">
           {/* Always a plain white coin, in both themes: the artwork itself
               sits on a white square, so a theme-aware background would

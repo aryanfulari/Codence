@@ -181,7 +181,7 @@ export default function InterviewPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 pb-16 lg:px-10 lg:pb-20">
+    <div className="mx-auto w-full max-w-[87.5rem] px-6 pb-16 lg:px-10 lg:pb-20">
       <section className="fade-up mx-auto max-w-3xl pt-8 pb-10 text-center lg:pt-10">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           PR Interview
