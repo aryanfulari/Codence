@@ -128,7 +128,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="mt-10 -mx-6 lg:-mx-10">
+        <div className="mt-10">
           <TestimonialMarquee />
         </div>
       </section>
