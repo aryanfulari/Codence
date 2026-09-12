@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { testimonials, type Testimonial } from "@/lib/testimonials";
 
-// Autoplay pace for the highlighted testimonial. This keeps running in the
-// background at all times, even while a card is hovered — hover only
-// overrides which card is *shown* as active, it never stops the cycle.
+// These are placeholder quotes, not real customer data, so there's no need
+// for hover-to-inspect interaction here — it just autoplays on a loop.
 const INTERVAL_MS = 4000;
 const TRANSITION_MS = 700;
 
@@ -49,15 +48,8 @@ function TestimonialCard({
 }
 
 export function TestimonialMarquee() {
-  // `active` keeps auto-advancing on its own timer no matter what the
-  // cursor is doing. `hovered` is a display-only override: while a card is
-  // hovered it takes over as the shown center, and the moment the cursor
-  // leaves, the display falls back to `active` — wherever the cycle has
-  // gotten to in the background, not where it was when the hover started.
   const [active, setActive] = useState(0);
-  const [hovered, setHovered] = useState<number | null>(null);
   const length = testimonials.length;
-  const displayed = hovered ?? active;
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -70,7 +62,7 @@ export function TestimonialMarquee() {
     <div className="relative h-64 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] sm:h-72">
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
         {testimonials.map((testimonial, index) => {
-          const offset = loopOffset(index, displayed, length);
+          const offset = loopOffset(index, active, length);
           const distance = Math.abs(offset);
           if (distance > 2) return null;
 
@@ -83,8 +75,6 @@ export function TestimonialMarquee() {
             <div
               key={index}
               className="absolute"
-              onMouseEnter={() => setHovered(index)}
-              onMouseLeave={() => setHovered(null)}
               style={{
                 transform: `translateX(${translateX}rem) scale(${scale})`,
                 opacity,
