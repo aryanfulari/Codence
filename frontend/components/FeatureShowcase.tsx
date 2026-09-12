@@ -155,11 +155,17 @@ const FEATURES: Feature[] = [
 ];
 
 export function FeatureShowcase() {
+  // `active` keeps auto-advancing on its own timer no matter what the
+  // cursor is doing. `hovered` is a display-only override: while a card is
+  // hovered it takes over as the shown card, and the moment the cursor
+  // leaves, the display falls back to `active` — wherever the cycle has
+  // gotten to in the background, not where it was when the hover started.
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState<number | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [inView, setInView] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const displayed = hovered ?? active;
 
   useEffect(() => {
     setReduceMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -186,12 +192,12 @@ export function FeatureShowcase() {
   }, []);
 
   useEffect(() => {
-    if (!inView || paused || reduceMotion) return;
+    if (!inView || reduceMotion) return;
     const id = window.setInterval(() => {
       setActive((i) => (i + 1) % FEATURES.length);
     }, CYCLE_MS);
     return () => window.clearInterval(id);
-  }, [inView, paused, reduceMotion]);
+  }, [inView, reduceMotion]);
 
   return (
     <div ref={rootRef}>
@@ -199,7 +205,7 @@ export function FeatureShowcase() {
         <h2 className="max-w-3xl text-2xl leading-[1.3] text-[var(--foreground)]/75 sm:text-3xl lg:text-4xl">
           Codence{" "}
           {FEATURES.map((feature, index) => {
-            const isActive = index === active;
+            const isActive = index === displayed;
             return (
               <span key={feature.keyword}>
                 <span
@@ -218,22 +224,20 @@ export function FeatureShowcase() {
         </h2>
       </ScrollReveal>
 
-      <div
-        className="mt-7 grid gap-6 lg:mt-8 lg:grid-cols-[1fr_1.12fr_1fr] lg:gap-8"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
+      <div className="mt-7 grid gap-6 lg:mt-8 lg:grid-cols-[1fr_1.12fr_1fr] lg:gap-8">
         {FEATURES.map((feature, index) => {
-          const isActive = index === active;
+          const isActive = index === displayed;
           return (
             <ScrollReveal key={feature.number} delayMs={index * 120}>
               <div
+                onMouseEnter={() => setHovered(index)}
+                onMouseLeave={() => setHovered(null)}
                 className={`flex h-full flex-col gap-4 transition-opacity duration-500 ${
                   isActive ? "opacity-100" : "opacity-40"
                 }`}
               >
                 <div
-                  className={`rounded-2xl border bg-[#f5f4f2] p-3.5 transition-all duration-500 dark:bg-[var(--surface-2)] ${
+                  className={`flex h-60 flex-col justify-center rounded-2xl border bg-[#f5f4f2] p-3.5 transition-all duration-500 dark:bg-[var(--surface-2)] sm:h-64 ${
                     isActive
                       ? "-translate-y-1 border-[var(--accent)] shadow-[0_2.8px_2.2px_rgba(0,0,0,0.034),0_6.7px_5.3px_rgba(0,0,0,0.048),0_12.5px_10px_rgba(0,0,0,0.06),0_22.3px_17.9px_rgba(0,0,0,0.072),0_41.8px_33.4px_rgba(0,0,0,0.086),0_100px_80px_rgba(0,0,0,0.12)]"
                       : "border-[var(--card-border)]"
