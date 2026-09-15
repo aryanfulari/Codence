@@ -164,13 +164,13 @@ export default function InterviewPage() {
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/chat"
-              className="rounded-2xl bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-strong)]"
+              className="rounded-2xl bg-[var(--ink)] px-6 py-3 text-sm font-semibold text-[var(--ink-foreground)] transition hover:bg-[var(--accent-strong)]"
             >
               Ask Codence about this decision
             </Link>
             <Link
               href="/"
-              className="rounded-2xl border border-[var(--card-border)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-white"
+              className="rounded-2xl border border-[var(--card-border)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[var(--surface)]"
             >
               Back to landing
             </Link>
@@ -181,7 +181,7 @@ export default function InterviewPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 pb-16 lg:px-10 lg:pb-20">
+    <div className="mx-auto w-full max-w-[87.5rem] px-6 pb-16 lg:px-10 lg:pb-20">
       <section className="fade-up mx-auto max-w-3xl pt-8 pb-10 text-center lg:pt-10">
         <p className="text-sm uppercase tracking-[0.34em] text-[var(--accent-strong)]">
           PR Interview
@@ -204,14 +204,14 @@ export default function InterviewPage() {
         )}
 
         <div className="mx-auto mt-8 grid max-w-md gap-3 text-sm text-[var(--muted)] sm:grid-cols-2">
-          <div className="group relative overflow-hidden rounded-2xl border border-[var(--card-border)] bg-white/80 px-4 py-3">
+          <div className="group relative overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--surface)]/80 px-4 py-3">
             <span className="hover-glow wash-coral-sky" aria-hidden />
             <p className="relative z-[1] uppercase tracking-[0.22em]">Progress</p>
             <p className="relative z-[1] mt-2 font-semibold text-[var(--foreground)]">
               {answeredCount} of {questions.length} answered
             </p>
           </div>
-          <div className="group relative overflow-hidden rounded-2xl border border-[var(--card-border)] bg-white/80 px-4 py-3">
+          <div className="group relative overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--surface)]/80 px-4 py-3">
             <span className="hover-glow wash-sky-mint" aria-hidden />
             <p className="relative z-[1] uppercase tracking-[0.22em]">Mode</p>
             <p className="relative z-[1] mt-2 font-semibold text-[var(--foreground)]">
@@ -223,7 +223,7 @@ export default function InterviewPage() {
 
       <div className="fade-up-delay rounded-[2rem] border border-[var(--card-border)] bg-[var(--card)] p-8 pb-10 shadow-[var(--shadow)] lg:p-10">
         {notFound && (
-          <div className="mb-6 rounded-2xl bg-[#fff3d6] px-4 py-3 text-sm leading-6 text-[#92620a]">
+          <div className="mb-6 rounded-2xl bg-[var(--warning-soft)] px-4 py-3 text-sm leading-6 text-[var(--warning)]">
             The backend is reachable, but it has no interview with this ID (it may never have been
             seeded, or was already submitted). Using fallback questions so you can still try the
             voice interview.
@@ -231,13 +231,13 @@ export default function InterviewPage() {
         )}
 
         {demoMode && (
-          <div className="mb-6 rounded-2xl bg-[#fff3d6] px-4 py-3 text-sm leading-6 text-[#92620a]">
+          <div className="mb-6 rounded-2xl bg-[var(--warning-soft)] px-4 py-3 text-sm leading-6 text-[var(--warning)]">
             Backend not reachable. Using fallback questions so you can still try the voice interview.
           </div>
         )}
 
         {!speechSupported && (
-          <div className="mb-6 rounded-2xl bg-[#fdeceb] px-4 py-3 text-sm leading-6 text-[#b3261e]">
+          <div className="mb-6 rounded-2xl bg-[var(--danger-soft)] px-4 py-3 text-sm leading-6 text-[var(--danger)]">
             Voice capture isn&apos;t supported in this browser. Try Chrome, or type your answer below.
           </div>
         )}
@@ -260,7 +260,7 @@ export default function InterviewPage() {
           ))}
         </div>
 
-        <article className="group fade-up-delay relative overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-white/85 p-6">
+        <article className="group fade-up-delay relative overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--surface)]/85 p-6">
           <span className="hover-glow wash-gold-coral" aria-hidden />
           <div className="relative z-[1] mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -278,8 +278,8 @@ export default function InterviewPage() {
               disabled={!speechSupported}
               className={`flex items-center gap-2 rounded-2xl border px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${
                 isRecording
-                  ? "border-[#b3261e] bg-[#fdeceb] text-[#b3261e]"
-                  : "border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-white"
+                  ? "border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--danger)]"
+                  : "border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--ink)] hover:text-[var(--ink-foreground)]"
               }`}
             >
               {isRecording && (
@@ -293,7 +293,7 @@ export default function InterviewPage() {
             </button>
           </div>
 
-          <div className="relative z-[1] rounded-2xl bg-[#f9f6f0] p-5">
+          <div className="relative z-[1] rounded-2xl bg-[var(--surface-2)] p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
               {isRecording ? "Listening..." : "Transcript"}
             </p>
@@ -312,7 +312,7 @@ export default function InterviewPage() {
               type="button"
               onClick={() => goToQuestion(currentIndex - 1)}
               disabled={currentIndex === 0}
-              className="rounded-2xl px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-white"
+              className="rounded-2xl px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-[var(--surface)]"
             >
               Previous
             </button>
@@ -320,7 +320,7 @@ export default function InterviewPage() {
               type="button"
               onClick={() => goToQuestion(currentIndex + 1)}
               disabled={currentIndex === questions.length - 1}
-              className="rounded-2xl px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-white"
+              className="rounded-2xl px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition disabled:cursor-not-allowed disabled:opacity-40 hover:bg-[var(--surface)]"
             >
               Next Question
             </button>

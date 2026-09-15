@@ -1,12 +1,42 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { testimonials, type Testimonial } from "@/lib/testimonials";
 
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+// These are placeholder quotes, not real customer data, so there's no need
+// for hover-to-inspect interaction here — it just autoplays on a loop.
+const INTERVAL_MS = 4000;
+const TRANSITION_MS = 700;
+
+// Shortest signed distance from `index` to `center` around the loop, e.g.
+// with 6 items, index 5 sits at offset -1 from center 0, not +5. Cards more
+// than 2 steps away aren't rendered at all.
+function loopOffset(index: number, center: number, length: number) {
+  let diff = index - center;
+  if (diff > length / 2) diff -= length;
+  if (diff < -length / 2) diff += length;
+  return diff;
+}
+
+function TestimonialCard({
+  testimonial,
+  highlighted
+}: {
+  testimonial: Testimonial;
+  highlighted: boolean;
+}) {
   return (
-    <div className="w-80 shrink-0 rounded-2xl border border-[var(--card-border)] bg-white p-6">
-      <p className="text-base leading-7 text-[var(--foreground)]">
+    <div
+      className={`flex h-56 w-72 flex-col justify-between rounded-2xl border p-6 transition-colors duration-700 sm:w-80 ${
+        highlighted
+          ? "border-[var(--accent)] bg-[var(--surface)] shadow-[var(--shadow)]"
+          : "border-[var(--card-border)] bg-[var(--surface)]"
+      }`}
+    >
+      <p className="line-clamp-4 text-base leading-7 text-[var(--foreground)]">
         &ldquo;{testimonial.quote}&rdquo;
       </p>
-      <div className="mt-5 flex items-center justify-between border-t border-[var(--card-border)] pt-4">
+      <div className="flex items-center justify-between border-t border-[var(--card-border)] pt-4">
         <div>
           <p className="text-sm font-semibold text-[var(--foreground)]">{testimonial.name}</p>
           <p className="text-xs text-[var(--muted)]">{testimonial.role}</p>
@@ -18,14 +48,44 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 }
 
 export function TestimonialMarquee() {
-  const track = [...testimonials, ...testimonials];
+  const [active, setActive] = useState(0);
+  const length = testimonials.length;
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((prev) => (prev + 1) % length);
+    }, INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [length]);
 
   return (
-    <div className="marquee-viewport">
-      <div className="marquee-track">
-        {track.map((testimonial, index) => (
-          <TestimonialCard key={index} testimonial={testimonial} />
-        ))}
+    <div className="relative h-64 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] sm:h-72">
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+        {testimonials.map((testimonial, index) => {
+          const offset = loopOffset(index, active, length);
+          const distance = Math.abs(offset);
+          if (distance > 2) return null;
+
+          const isActive = offset === 0;
+          const scale = isActive ? 1 : distance === 1 ? 0.86 : 0.74;
+          const opacity = isActive ? 1 : distance === 1 ? 0.55 : 0.22;
+          const translateX = offset * 19.5;
+
+          return (
+            <div
+              key={index}
+              className="absolute"
+              style={{
+                transform: `translateX(${translateX}rem) scale(${scale})`,
+                opacity,
+                zIndex: 10 - distance,
+                transition: `transform ${TRANSITION_MS}ms ease, opacity ${TRANSITION_MS}ms ease`
+              }}
+            >
+              <TestimonialCard testimonial={testimonial} highlighted={isActive} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

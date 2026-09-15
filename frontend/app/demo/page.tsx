@@ -37,12 +37,12 @@ export default function DemoDashboard() {
   const columns: DecisionStatus[] = ["captured", "queued", "skipped"];
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 py-8 lg:px-10 lg:py-10">
+    <div className="mx-auto w-full max-w-[87.5rem] px-6 py-8 lg:px-10 lg:py-10">
       {/* instance bar */}
       <div className="flex flex-col gap-4 rounded-2xl border border-[var(--card-border)] bg-[var(--card)] p-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <span className="font-mono text-sm font-semibold text-[var(--foreground)]">codence</span>
-          <span className="rounded-full bg-[#e7f3ea] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[#1f7a54]">
+          <span className="rounded-full bg-[var(--success-soft)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--success)]">
             {mode === "local" ? "local" : "cloud"}
           </span>
         </div>
@@ -51,7 +51,7 @@ export default function DemoDashboard() {
           {health.map((h) => (
             <span key={h.label} className="inline-flex items-center gap-1.5 font-mono text-[11px] text-[var(--muted)]">
               <span
-                className={`h-1.5 w-1.5 rounded-full ${h.ok ? "bg-[#3aa76e]" : "bg-[#b3261e]"}`}
+                className={`h-1.5 w-1.5 rounded-full ${h.ok ? "bg-[var(--success)]" : "bg-[var(--danger)]"}`}
                 aria-hidden
               />
               {h.label}
@@ -69,7 +69,7 @@ export default function DemoDashboard() {
               type="button"
               onClick={() => setMode(m)}
               className={`rounded-full px-2.5 py-1 uppercase tracking-[0.1em] transition ${
-                mode === m ? "bg-[var(--foreground)] text-white" : "text-[var(--muted)]"
+                mode === m ? "bg-[var(--ink)] text-[var(--ink-foreground)]" : "text-[var(--muted)]"
               }`}
             >
               {m}
@@ -125,7 +125,7 @@ export default function DemoDashboard() {
                 {selected.status === "queued" && (
                   <Link
                     href="/interview/demo-pr"
-                    className="ml-auto rounded-full bg-[var(--foreground)] px-3 py-1.5 font-semibold text-white"
+                    className="ml-auto rounded-full bg-[var(--ink)] px-3 py-1.5 font-semibold text-[var(--ink-foreground)]"
                   >
                     Start interview
                   </Link>
@@ -182,24 +182,24 @@ export default function DemoDashboard() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Why did we remove retry logic in payments?"
-                className="w-full rounded-full border border-[var(--card-border)] bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
+                className="w-full rounded-full border border-[var(--card-border)] bg-[var(--surface)] px-4 py-2.5 text-sm outline-none focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-soft)]"
               />
               <button
                 type="submit"
-                className="shrink-0 rounded-full bg-[var(--foreground)] px-4 py-2.5 text-sm font-semibold text-white"
+                className="shrink-0 rounded-full bg-[var(--ink)] px-4 py-2.5 text-sm font-semibold text-[var(--ink-foreground)]"
               >
                 Ask
               </button>
             </form>
 
             {asked && (
-              <div className="mt-4 rounded-xl border border-[var(--card-border)] bg-white px-4 py-3 text-sm leading-6">
+              <div className="mt-4 rounded-xl border border-[var(--card-border)] bg-[var(--surface)] px-4 py-3 text-sm leading-6">
                 {answer ? (
                   <>
                     <p className="text-[var(--foreground)]">{answer.summary}</p>
                     <a
                       href={answer.prUrl}
-                      className="mt-2.5 inline-flex items-center gap-2 rounded-lg border border-[var(--card-border)] bg-[#faf8f5] px-2.5 py-1.5 font-mono text-[11px] text-[var(--accent-strong)]"
+                      className="mt-2.5 inline-flex items-center gap-2 rounded-lg border border-[var(--card-border)] bg-[var(--surface-2)] px-2.5 py-1.5 font-mono text-[11px] text-[var(--accent-strong)]"
                     >
                       {answer.prTitle} · {answer.author} · {answer.date}
                     </a>
@@ -229,7 +229,7 @@ export default function DemoDashboard() {
             </p>
             <Link
               href="/interview/demo-pr"
-              className="mt-3 block rounded-full bg-[var(--foreground)] py-2 text-center text-sm font-semibold text-white"
+              className="mt-3 block rounded-full bg-[var(--ink)] py-2 text-center text-sm font-semibold text-[var(--ink-foreground)]"
             >
               Start interview
             </Link>
@@ -247,7 +247,7 @@ export default function DemoDashboard() {
                     {r.openPrs} open
                     <span
                       className={`h-1.5 w-1.5 rounded-full ${
-                        r.webhook === "ok" ? "bg-[#3aa76e]" : "bg-[#d99441]"
+                        r.webhook === "ok" ? "bg-[var(--success)]" : "bg-[var(--warning)]"
                       }`}
                       aria-hidden
                     />
@@ -295,7 +295,7 @@ function BoardRow({
       type="button"
       onClick={onSelect}
       className={`w-full rounded-lg border p-2.5 text-left transition ${
-        active ? "border-[var(--accent)] bg-white" : "border-[var(--card-border)] bg-white hover:border-[var(--accent)]/50"
+        active ? "border-[var(--accent)] bg-[var(--surface)]" : "border-[var(--card-border)] bg-[var(--surface)] hover:border-[var(--accent)]/50"
       }`}
     >
       <div className="flex items-center justify-between font-mono text-[10px] text-[var(--muted)]">

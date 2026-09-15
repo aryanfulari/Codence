@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Lets `dark:` utilities target our manual [data-theme="dark"] toggle
+   (set by components/ThemeScript.tsx) instead of Tailwind v4's default
+   prefers-color-scheme media query, since the theme is user-chosen and
+   persisted, not just inherited from the OS. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
   /* Monad style-guide theme — applied site-wide. */
   --background: #f6f3f1;
@@ -7,6 +13,8 @@
   --muted: #797776;
   --card: #f6f3f1;
   --card-border: #cecac8;
+  --surface: #ffffff;
+  --surface-2: #f5f4f2;
   --accent: #2b59d1;
   --accent-strong: #1e3f9c;
   --accent-soft: #cfdaf5;
@@ -20,9 +28,64 @@
   --matte-graphite: #4e4d4d;
   --matte-smoke: #797776;
   --matte-ash: #cecac8;
+  --success: #1f7a54;
+  --success-soft: #e7f3ea;
+  --warning: #92620a;
+  --warning-soft: #fff3d6;
+  --danger: #b3261e;
+  --danger-soft: #fdeceb;
+  /* The "ink" pair is for solid, high-contrast surfaces — primary buttons,
+     dark chat bubbles, code/diff panels' own dark rows — that need to flip
+     which way round they go per theme: near-black on light, near-white on
+     dark, always paired with --ink-foreground for the text/icon on top. */
+  --ink: #242424;
+  --ink-foreground: #ffffff;
+  /* Faint decorative connector lines (the reasoning-flow diagram's cable
+     routing) — needs to flip from dark-on-light to light-on-dark, unlike
+     --card-border which stays a similar mid-gray in both themes. */
+  --wire: rgba(36, 36, 36, 0.16);
   --font-display: var(--font-monad-serif), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-monad-mono), ui-monospace, "SFMono-Regular", monospace;
   --font-mono: var(--font-monad-mono), ui-monospace, "SFMono-Regular", monospace;
+  color-scheme: light;
+}
+
+/* Dark mode — same type system (Source Serif 4 / IBM Plex Mono), same Lake
+   Blue accent family, recoloured onto a near-black ground instead of
+   parchment. Applied via [data-theme="dark"] on <html>, set by the inline
+   script in layout.tsx before first paint so there's no flash of the wrong
+   theme, and toggled/persisted by components/ThemeToggle.tsx. */
+:root[data-theme="dark"] {
+  --background: #0a0a0c;
+  --foreground: #f1efe9;
+  --muted: #9b9791;
+  --card: #131316;
+  --card-border: #2a2a2f;
+  --surface: #17171b;
+  --surface-2: #1c1c21;
+  --accent: #5b83e0;
+  --accent-strong: #9db6f0;
+  --accent-soft: #1c2440;
+  --hero: #5b83e0;
+  --shadow: 0 0 20px rgba(0, 0, 0, 0.45);
+  --wash-coral: #d9714f;
+  --wash-sky: #5b7fc4;
+  --wash-mint: #4fae82;
+  --wash-gold: #c9a34a;
+  --periwinkle: #1c2440;
+  --matte-graphite: #d8d5cf;
+  --matte-smoke: #9b9791;
+  --matte-ash: #2a2a2f;
+  --success: #4fb082;
+  --success-soft: #14261d;
+  --warning: #e0b45a;
+  --warning-soft: #2b230f;
+  --danger: #e0685c;
+  --danger-soft: #2b1614;
+  --ink: #f1efe9;
+  --ink-foreground: #0a0a0c;
+  --wire: rgba(255, 255, 255, 0.16);
+  color-scheme: dark;
 }
 
 * {
@@ -315,8 +378,8 @@ body {
   height: 1rem;
   width: 1rem;
   border-radius: 9999px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-top-color: #fff;
+  border: 2px solid color-mix(in srgb, var(--ink-foreground) 40%, transparent);
+  border-top-color: var(--ink-foreground);
   animation: spin 0.7s linear infinite;
 }
 
@@ -379,37 +442,6 @@ body {
   50% {
     opacity: 0.4;
     transform: scale(1.4);
-  }
-}
-
-.marquee-viewport {
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  gap: 1.25rem;
-  animation: marquee 38s linear infinite;
-}
-
-.marquee-track-reverse {
-  animation-direction: reverse;
-}
-
-.marquee-viewport:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
   }
 }
 

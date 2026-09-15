@@ -86,7 +86,7 @@ export function ReasoningFlow() {
   }, [reduceMotion]);
 
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto w-full">
       <ScrollReveal>
         <div className="max-w-2xl">
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent-strong)]">
@@ -122,7 +122,7 @@ export function ReasoningFlow() {
               <path
                 key={s.label}
                 d={leftPath(i)}
-                stroke="rgba(36,36,36,0.16)"
+                style={{ stroke: "var(--wire)" }}
                 strokeWidth={1.4}
                 strokeLinecap="round"
                 vectorEffect="non-scaling-stroke"
@@ -132,7 +132,7 @@ export function ReasoningFlow() {
               <path
                 key={d}
                 d={rightPath(i)}
-                stroke="rgba(36,36,36,0.16)"
+                style={{ stroke: "var(--wire)" }}
                 strokeWidth={1.4}
                 strokeLinecap="round"
                 vectorEffect="non-scaling-stroke"
@@ -187,7 +187,7 @@ export function ReasoningFlow() {
                 className="absolute left-0"
                 style={{ top: `${(rightY(i) / VIEW_H) * 100}%`, transform: "translateY(-50%)" }}
               >
-                <span className="inline-flex items-center rounded-full border border-[#4aae78]/35 bg-[#e7f3ea] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-[#1f5136]">
+                <span className="inline-flex items-center rounded-full border border-[#4aae78]/35 bg-[var(--success-soft)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--success)]">
                   {d}
                 </span>
               </div>
@@ -309,14 +309,19 @@ function SplitBlock({
 
 function MockShell({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[0_24px_60px_rgba(38,33,25,0.12)]">
+    <div className="flex min-h-[24rem] flex-col overflow-hidden rounded-2xl border border-[var(--card-border)] bg-[var(--card)] shadow-[0_24px_60px_rgba(38,33,25,0.12)]">
       <div className="flex items-center gap-2 border-b border-[var(--card-border)] px-4 py-3">
         <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
         <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--foreground)]">
           {title}
         </span>
       </div>
-      {children}
+      {/* Some mockups (the model toggle, in particular) have far less
+          natural content than others, so without this the card would just
+          be short instead of matching the visual weight of its siblings.
+          Centering within the shared min-height keeps light content from
+          reading as an under-filled box. */}
+      <div className="flex flex-1 flex-col justify-center">{children}</div>
     </div>
   );
 }
@@ -347,15 +352,15 @@ function ChatMock() {
     <MockShell title="Why chat">
       <div className="space-y-3 p-4 lg:p-5">
         <div className="flex justify-end">
-          <p className="max-w-xs rounded-2xl rounded-br-sm bg-[var(--foreground)] px-3.5 py-2 text-sm leading-5 text-white">
+          <p className="max-w-xs rounded-2xl rounded-br-sm bg-[var(--ink)] px-3.5 py-2 text-sm leading-5 text-[var(--ink-foreground)]">
             Why did we remove retry logic in payments?
           </p>
         </div>
-        <div className="max-w-md rounded-2xl rounded-bl-sm border border-[var(--card-border)] bg-white px-3.5 py-3 text-sm leading-6 text-[var(--foreground)]">
+        <div className="max-w-md rounded-2xl rounded-bl-sm border border-[var(--card-border)] bg-[var(--surface)] px-3.5 py-3 text-sm leading-6 text-[var(--foreground)]">
           Automatic retries fired before the gateway confirmed failure, so under load the same charge went
           through twice. A fixed delay was rejected because the gateway already queues.
           <span className="ml-0.5 inline-block h-3.5 w-[2px] translate-y-0.5 animate-pulse bg-[var(--accent)]" />
-          <span className="mt-2.5 flex w-fit items-center gap-1.5 rounded-lg border border-[var(--card-border)] bg-[#faf8f5] px-2.5 py-1.5 font-mono text-[11px] text-[var(--accent-strong)]">
+          <span className="mt-2.5 flex w-fit items-center gap-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--surface-2)] px-2.5 py-1.5 font-mono text-[11px] text-[var(--accent-strong)]">
             <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[var(--accent)] text-[9px] font-semibold text-white">
               A
             </span>
@@ -365,11 +370,11 @@ function ChatMock() {
 
         <div className="!mt-5 border-t border-dashed border-[var(--card-border)] pt-4">
           <div className="flex justify-end">
-            <p className="max-w-xs rounded-2xl rounded-br-sm bg-[var(--foreground)] px-3.5 py-2 text-sm leading-5 text-white">
+            <p className="max-w-xs rounded-2xl rounded-br-sm bg-[var(--ink)] px-3.5 py-2 text-sm leading-5 text-[var(--ink-foreground)]">
               Why is the pricing table hard-coded?
             </p>
           </div>
-          <div className="mt-3 max-w-xs rounded-2xl rounded-bl-sm border border-[var(--card-border)] bg-white px-3.5 py-3 text-sm leading-6 text-[var(--muted)]">
+          <div className="mt-3 max-w-xs rounded-2xl rounded-bl-sm border border-[var(--card-border)] bg-[var(--surface)] px-3.5 py-3 text-sm leading-6 text-[var(--muted)]">
             Nothing relevant is stored. No interview has covered pricing.
             <span className="mt-2 block font-mono text-[11px] text-[var(--foreground)]/60">
               Codence answers only from recorded decisions. It will not guess.
@@ -391,7 +396,7 @@ function ModelToggleMock() {
           </span>
           <span>
             <span className="text-sm font-semibold text-[var(--foreground)]">Local</span>
-            <span className="ml-2 rounded bg-[#e7f3ea] px-1.5 py-0.5 font-mono text-[10px] text-[#1f7a54]">
+            <span className="ml-2 rounded bg-[var(--success-soft)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--success)]">
               no key
             </span>
             <span className="mt-1 block font-mono text-[11px] text-[var(--muted)]">
@@ -418,7 +423,7 @@ function ModelToggleMock() {
 
 function BoardColumn({ title, count, children }: { title: string; count: number; children: ReactNode }) {
   return (
-    <div className="min-w-[13rem] rounded-xl bg-black/[0.02] p-2.5">
+    <div className="min-w-[13rem] rounded-xl bg-black/[0.02] p-2.5 dark:bg-white/[0.04]">
       <div className="flex items-center justify-between px-1 pb-2">
         <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
           {title}
@@ -446,7 +451,7 @@ function DecisionCard({
   pending?: boolean;
 }) {
   return (
-    <div className="rounded-lg border border-[var(--card-border)] bg-white p-2.5 shadow-[0_1px_3px_rgba(22,21,15,0.04)]">
+    <div className="rounded-lg border border-[var(--card-border)] bg-[var(--surface)] p-2.5 shadow-[0_1px_3px_rgba(22,21,15,0.04)]">
       <div className="flex items-center justify-between">
         <span className="font-mono text-[10px] text-[var(--muted)]">{id}</span>
         <span className="h-3.5 w-3.5 rounded-full bg-[var(--accent-soft)]" />
@@ -454,9 +459,13 @@ function DecisionCard({
       <p className="mt-1 text-[11px] font-semibold leading-4 text-[var(--foreground)]">{title}</p>
       <div className="mt-2 flex flex-wrap items-center gap-1.5 font-mono text-[9px]">
         <span className="text-[var(--muted)]">{level}</span>
-        <span className="rounded bg-black/[0.05] px-1.5 py-0.5 text-[var(--muted)]">score {score}</span>
-        {reasoning && <span className="rounded bg-[#e7f3ea] px-1.5 py-0.5 text-[#1f7a54]">Reasoning</span>}
-        {pending && <span className="rounded bg-[#fbf0d9] px-1.5 py-0.5 text-[#956213]">Queued</span>}
+        <span className="rounded bg-black/[0.05] px-1.5 py-0.5 text-[var(--muted)] dark:bg-white/[0.08]">score {score}</span>
+        {reasoning && (
+          <span className="rounded bg-[var(--success-soft)] px-1.5 py-0.5 text-[var(--success)]">Reasoning</span>
+        )}
+        {pending && (
+          <span className="rounded bg-[var(--warning-soft)] px-1.5 py-0.5 text-[var(--warning)]">Queued</span>
+        )}
       </div>
     </div>
   );
@@ -482,7 +491,7 @@ function Diamond({ active, reduceMotion }: { active: number; reduceMotion: boole
         );
       })}
 
-      <span className="relative z-[1] flex h-24 w-24 rotate-45 items-center justify-center rounded-[1.35rem] border border-[var(--card-border)] bg-[#faf8f5] shadow-[var(--shadow)]">
+      <span className="relative z-[1] flex h-24 w-24 rotate-45 items-center justify-center rounded-[1.35rem] border border-[var(--card-border)] bg-[var(--surface-2)] shadow-[var(--shadow)]">
         <span className={`-rotate-45 ${reduceMotion ? "" : "animate-[spin_11s_linear_infinite]"}`}>
           <DottedRing />
         </span>

@@ -13,16 +13,25 @@ export function SiteFooter() {
 
   return (
     <footer className="relative z-10 border-t border-[var(--card-border)] bg-[var(--background)]">
-      <div className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-10">
+      <div className="mx-auto w-full max-w-[87.5rem] px-6 py-12 lg:px-10">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex max-w-xs flex-col gap-3">
-            <Link href="/" className="inline-block">
+            <Link href="/" className="inline-flex items-center gap-2">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
+                <Image
+                  src="/codence-logo.png"
+                  alt=""
+                  width={64}
+                  height={64}
+                  className="h-full w-full scale-125 object-cover"
+                />
+              </span>
               <Image
                 src="/codence-wordmark.png"
                 alt="Codence"
                 width={432}
                 height={144}
-                className="h-7 w-auto mix-blend-multiply"
+                className="h-7 w-auto mix-blend-multiply dark:mix-blend-screen dark:invert"
               />
             </Link>
             <p className="text-sm leading-6 text-[var(--muted)]">
